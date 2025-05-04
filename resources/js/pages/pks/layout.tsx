@@ -1,6 +1,6 @@
 import type React from "react"
 import ScrollProgress from "@/components/pks/scroll-progress"
-import "./globals.css"
+import "./globals.cssX"
 
 const inter = "font";
 
