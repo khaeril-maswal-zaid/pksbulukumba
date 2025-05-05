@@ -5,7 +5,7 @@ import { usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-export default function AboutSection() {
+export default function AboutSection({ about }) {
     const [ref, inView] = useInView({
         triggerOnce: true,
         threshold: 0.2,
@@ -33,18 +33,10 @@ export default function AboutSection() {
                         animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        <h2 className="mb-6 text-3xl font-bold text-black">Tentang PKS Bulukumba</h2>
+                        <h2 className="mb-6 text-3xl font-bold text-black">{about?.title}</h2>
                         <div className="mb-8 h-1 w-20 bg-[#F47C20]"></div>
-                        <p className="mb-6 text-gray-600">
-                            Partai Keadilan Sejahtera (PKS) Bulukumba adalah partai politik yang berkomitmen untuk membangun masyarakat Bulukumba yang
-                            adil, makmur, dan sejahtera berdasarkan nilai-nilai keislaman dan keindonesiaan.
-                        </p>
-                        <p className="mb-8 text-gray-600">
-                            Visi kami adalah menjadi partai pelopor dalam mewujudkan cita-cita nasional bangsa Indonesia sebagaimana dimaksud dalam
-                            Pembukaan UUD 1945, khususnya di wilayah Bulukumba. Misi kami adalah menjadikan Bulukumba sebagai daerah yang maju,
-                            mandiri, dan berdaya saing tinggi dengan mengedepankan nilai-nilai keadilan, kejujuran, dan kesejahteraan bagi seluruh
-                            masyarakat.
-                        </p>
+                        <div className="mb-5 text-gray-600" dangerouslySetInnerHTML={{ __html: about?.body1 }} />
+                        <div className="mb-8 text-gray-600" dangerouslySetInnerHTML={{ __html: about?.body2 }} />
                         <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Selengkapnya</Button>
                     </motion.div>
                 </div>
