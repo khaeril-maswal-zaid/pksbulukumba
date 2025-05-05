@@ -31,6 +31,6 @@ jobs:
 
           rsync -avz rsync -avz --delete -e "ssh -i private_key.pem -o StrictHostKeyChecking=no -p 65002" \
             public/build/ \
-            ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/u446959717/domains/pintuperadaban.com/public_html/Webcrafters_pksbulukumba/build/
+            ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/u446959717/domains/bulukumba.pks.id/public_html/build/
 
         shell: bash
