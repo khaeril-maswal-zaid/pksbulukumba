@@ -27,7 +27,7 @@ export default function IntegrationSection() {
                             </p>
                         </CardContent>
                         <CardFooter className="flex justify-center">
-                            <Link href="https://daftar.pks.id/" target="_blank">
+                            <Link href="https://daftar.pks.id/">
                                 <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Daftar Sekarang</Button>
                             </Link>
                         </CardFooter>

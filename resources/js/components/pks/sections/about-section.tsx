@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -37,7 +36,7 @@ export default function AboutSection({ about }) {
                         <div className="mb-8 h-1 w-20 bg-[#F47C20]"></div>
                         <div className="mb-5 text-gray-600" dangerouslySetInnerHTML={{ __html: about?.body1 }} />
                         <div className="mb-8 text-gray-600" dangerouslySetInnerHTML={{ __html: about?.body2 }} />
-                        <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Selengkapnya</Button>
+                        {/* <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Selengkapnya</Button> */}
                     </motion.div>
                 </div>
             </div>

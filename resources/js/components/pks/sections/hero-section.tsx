@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -66,12 +66,17 @@ export default function HeroSection() {
                                     transition={{ duration: 0.8, delay: 0.4 }}
                                     key={`buttons-${currentSlide}`}
                                 >
-                                    <Button size="lg" className="bg-[#F47C20] text-white hover:bg-[#e06b15]">
-                                        Gabung PKS
-                                    </Button>
-                                    <Button size="lg" variant="outline" className="border-white bg-white text-gray-800 hover:bg-gray-100">
-                                        Lihat Agenda
-                                    </Button>
+                                    <Link href="https://daftar.pks.id/">
+                                        <Button size="lg" className="bg-[#F47C20] text-white hover:bg-[#e06b15]">
+                                            Gabung PKS
+                                        </Button>
+                                    </Link>
+
+                                    <Link href="/#agenda">
+                                        <Button size="lg" variant="outline" className="border-white bg-white text-gray-800 hover:bg-gray-100">
+                                            Lihat Agenda
+                                        </Button>
+                                    </Link>
                                 </motion.div>
                             </div>
                         </div>
