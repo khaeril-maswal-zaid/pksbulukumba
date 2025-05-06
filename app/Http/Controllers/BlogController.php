@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -39,6 +40,15 @@ class BlogController extends Controller
      */
     public function show(Blog $blog): Response
     {
+        $ogTags = [
+            'title' => $blog->title,
+            'description' => Str::limit(strip_tags($blog->excerpt), 200),
+            'image' => asset('storage/' . $blog->picture1),
+            'url' => route('blog.show', $blog),
+        ];
+
+        request()->attributes->set('og', $ogTags);
+
         $data = [
             'blogDetail' => $blog,
             'relatedNews' => Blog::select(['title', 'slug', 'excerpt', 'picture1', 'created_at'])->latest()->take(3)->get(),
