@@ -1,11 +1,15 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-export default function HeroSection({ slides }) {
+export default function HeroSection() {
+    const { slides } = usePage().props;
+    console.log(slides);
+
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const nextSlide = () => {

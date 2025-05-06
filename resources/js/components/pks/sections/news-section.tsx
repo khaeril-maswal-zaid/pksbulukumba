@@ -7,41 +7,6 @@ import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 
-const newsItems = [
-    {
-        id: 1,
-        slug: 'pks-bulukumba-gelar-bakti-sosial',
-        title: 'PKS Bulukumba Gelar Bakti Sosial di Desa Terpencil',
-        excerpt: 'PKS Bulukumba mengadakan kegiatan bakti sosial berupa pembagian sembako dan pemeriksaan kesehatan gratis di desa terpencil.',
-        date: '12 April 2023',
-        image: '/placeholder.svg?height=200&width=300',
-    },
-    {
-        id: 2,
-        slug: 'kader-pks-bulukumba-raih-penghargaan',
-        title: 'Kader PKS Bulukumba Raih Penghargaan Tokoh Inspiratif',
-        excerpt: 'Salah satu kader PKS Bulukumba berhasil meraih penghargaan sebagai tokoh inspiratif tingkat provinsi.',
-        date: '28 Maret 2023',
-        image: '/placeholder.svg?height=200&width=300',
-    },
-    {
-        id: 3,
-        slug: 'pks-bulukumba-dukung-program-umkm',
-        title: 'PKS Bulukumba Dukung Program Pemberdayaan UMKM',
-        excerpt: 'PKS Bulukumba menginisiasi program pemberdayaan UMKM untuk meningkatkan perekonomian masyarakat lokal.',
-        date: '15 Maret 2023',
-        image: '/placeholder.svg?height=200&width=300',
-    },
-    {
-        id: 4,
-        slug: 'fraksi-pks-bulukumba-tolak-kenaikan-bbm',
-        title: 'Fraksi PKS Bulukumba Tolak Kenaikan Harga BBM',
-        excerpt: 'Fraksi PKS di DPRD Bulukumba menyatakan sikap menolak rencana kenaikan harga BBM yang memberatkan masyarakat.',
-        date: '2 Maret 2023',
-        image: '/placeholder.svg?height=200&width=300',
-    },
-];
-
 export default function NewsSection({ blogs }) {
     blogs.map((blog) => {
         blog.created_at = new Intl.DateTimeFormat('id-ID', {
@@ -50,12 +15,6 @@ export default function NewsSection({ blogs }) {
             year: 'numeric',
         }).format(blogs.created_at);
     });
-
-    const formattedDate = new Intl.DateTimeFormat('id-ID', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-    }).format(blogs.created_at);
 
     const [ref, inView] = useInView({
         triggerOnce: true,
@@ -98,8 +57,8 @@ export default function NewsSection({ blogs }) {
                 >
                     {blogs.map((item) => (
                         <motion.div key={item.id} variants={item}>
-                            <Card className="h-full gap-0 overflow-hidden transition-all duration-300 hover:shadow-lg">
-                                <div className="relative h-48 w-full overflow-hidden">
+                            <Card className="h-full gap-0 overflow-hidden py-0 transition-all duration-300 hover:shadow-lg">
+                                <div className="relative h-60 w-full overflow-hidden">
                                     <img
                                         src={item.picture1 || '/placeholder.svg'}
                                         alt={item.title}
@@ -113,11 +72,11 @@ export default function NewsSection({ blogs }) {
                                         {item.created_at}
                                     </CardDescription>
                                 </CardHeader>
-                                <CardContent className="p-4 pt-0">
+                                <CardContent className="p-4 pt-0 pb-3">
                                     <p className="line-clamp-5 text-sm text-gray-600">{item.excerpt}</p>
                                 </CardContent>
                                 <CardFooter className="p-4 pt-0">
-                                    <Link href={`/berita/${item.slug}`} className="text-sm font-medium text-[#F47C20] hover:underline">
+                                    <Link href={`/blog/${item.slug}`} className="text-sm font-medium text-[#F47C20] hover:underline">
                                         Baca selengkapnya
                                     </Link>
                                 </CardFooter>
@@ -127,7 +86,7 @@ export default function NewsSection({ blogs }) {
                 </motion.div>
 
                 <div className="mt-12 text-center">
-                    <Link href="/berita">
+                    <Link href="/blog">
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Lihat Semua Berita</Button>
                         </motion.div>

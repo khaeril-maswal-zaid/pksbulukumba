@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('picture1')->default('default.png');
             $table->string('picture2')->nullable();
             $table->string('picture3')->nullable();
+            $table->json('tags')->nullable();
             $table->integer('visit')->default(50);
             $table->timestamps();
         });
