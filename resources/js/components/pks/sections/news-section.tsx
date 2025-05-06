@@ -60,7 +60,7 @@ export default function NewsSection({ blogs }) {
                             <Card className="h-full gap-0 overflow-hidden py-0 transition-all duration-300 hover:shadow-lg">
                                 <div className="relative h-60 w-full overflow-hidden">
                                     <img
-                                        src={item.picture1 || '/placeholder.svg'}
+                                        src={`/storage/${item.picture1}` || '/placeholder.svg'}
                                         alt={item.title}
                                         className="object-cover transition-transform duration-500 hover:scale-110"
                                     />
