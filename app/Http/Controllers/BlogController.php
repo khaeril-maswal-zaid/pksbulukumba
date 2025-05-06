@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class BlogController extends Controller
 {
@@ -35,9 +37,13 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show(Blog $blog): Response
     {
-        //
+        $data = [
+            'blogDetail' => $blog,
+            'relatedNews' => Blog::select(['title', 'slug', 'excerpt', 'picture1', 'created_at'])->latest()->take(3)->get(),
+        ];
+        return Inertia::render('pks/berita/[slug]/page', $data);
     }
 
     /**

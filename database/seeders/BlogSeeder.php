@@ -25,6 +25,7 @@ class BlogSeeder extends Seeder
                 'picture1' => 'image/blog/pks-bulukumba-menguatkan-program-pengkaderan.jpeg',
                 'picture2' => 'default.png',
                 'picture3' => 'default.png',
+                'tags' => ['bulog', 'jagung', 'panen', 'dprd'],
                 'visit' => 50,
             ],
             [
@@ -38,6 +39,7 @@ class BlogSeeder extends Seeder
                 'picture1' => 'image/blog/anggota-dprd-pks-minta-bulog-bulukumba-ikut-serap-hasil-panenn-jagung-petani.jpg',
                 'picture2' => 'default.png',
                 'picture3' => 'default.png',
+                'tags' => ['bulog', 'jagung', 'panen', 'dprd'],
                 'visit' => 50,
             ],
             [
@@ -51,6 +53,7 @@ class BlogSeeder extends Seeder
                 'picture1' => 'image/blog/dprd-bulukumba-ukir-sejarah-politisi-perempuan-pks-jadi-ketua.jpg',
                 'picture2' => 'default.png',
                 'picture3' => 'default.png',
+                'tags' => ['bulog', 'jagung', 'panen', 'dprd'],
                 'visit' => 50,
             ],
             [
@@ -64,6 +67,7 @@ class BlogSeeder extends Seeder
                 'picture1' => 'image/blog/pks-bulukumba-tegaskan-dukungan-ke-andi-utta-edy-manaf-ini-8-alasannya.png',
                 'picture2' => 'default.png',
                 'picture3' => 'default.png',
+                'tags' => ['bulog', 'jagung', 'panen', 'dprd'],
                 'visit' => 50,
             ],
             [
@@ -77,6 +81,7 @@ class BlogSeeder extends Seeder
                 'picture1' => 'image/assets/logo-pks.png',
                 'picture2' => 'default.png',
                 'picture3' => 'default.png',
+                'tags' => ['bulog', 'jagung', 'panen', 'dprd'],
                 'visit' => 50,
             ],
         ];
@@ -93,6 +98,7 @@ class BlogSeeder extends Seeder
                 'picture1' => $data['picture1'],
                 'picture2' => $data['picture2'],
                 'picture3' => $data['picture3'],
+                'tags' => $data['tags'],
                 'visit' => $data['visit'],
             ]);
         }

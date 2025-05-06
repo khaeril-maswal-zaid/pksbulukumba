@@ -21,6 +21,12 @@ class Blog extends Model
         'picture1',
         'picture2',
         'picture3',
+        'tags',
         'visit'
+    ];
+
+    protected $casts = [
+        'tags' => 'array',
+        'created_at' => 'datetime:Y-m-d H:i:s',
     ];
 }
