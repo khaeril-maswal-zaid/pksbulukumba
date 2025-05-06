@@ -61,7 +61,7 @@ export default function NewsDetail({ news, relatedNews }: NewsDetailProps) {
     };
 
     return (
-        <div className="mt-7 min-h-screen bg-white">
+        <div className="bg-green mt-7 min-h-screen">
             {/* Breadcrumb */}
             <div className="border-b bg-gray-50 py-4">
                 <div className="container mx-auto px-4">
@@ -108,11 +108,11 @@ export default function NewsDetail({ news, relatedNews }: NewsDetailProps) {
                             </div>
                             <div className="flex items-center">
                                 <User className="mr-1 h-4 w-4" />
-                                <span>{news.author}</span>
+                                <span>{news.author || 'Official PKS Bulukumba'}</span>
                             </div>
                             <div className="flex items-center">
                                 <Tag className="mr-1 h-4 w-4" />
-                                <span>{news.category}</span>
+                                <span>{news.category || 'News'}</span>
                             </div>
                         </div>
 
