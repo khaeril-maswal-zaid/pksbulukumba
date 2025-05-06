@@ -37,7 +37,7 @@ export default function HeroSection() {
                             index === currentSlide ? 'opacity-100' : 'pointer-events-none opacity-0'
                         }`}
                     >
-                        <img src={slide.image} className="h-full w-full object-cover" />
+                        <img src={`/storage/${slide.image}`} className="h-full w-full object-cover" />
                         <div className="absolute inset-0 bg-black/40" />
                         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white">
                             <div className="max-w-3xl">
@@ -66,11 +66,11 @@ export default function HeroSection() {
                                     transition={{ duration: 0.8, delay: 0.4 }}
                                     key={`buttons-${currentSlide}`}
                                 >
-                                    <Link href="https://daftar.pks.id/">
+                                    <a href="https://daftar.pks.id/" target="_blank" rel="noopener noreferrer">
                                         <Button size="lg" className="bg-[#F47C20] text-white hover:bg-[#e06b15]">
-                                            Gabung PKS
+                                            Daftar Sekarang
                                         </Button>
-                                    </Link>
+                                    </a>
 
                                     <Link href="/#agenda">
                                         <Button size="lg" variant="outline" className="border-white bg-white text-gray-800 hover:bg-gray-100">

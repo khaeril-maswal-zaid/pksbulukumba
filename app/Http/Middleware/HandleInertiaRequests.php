@@ -52,25 +52,25 @@ class HandleInertiaRequests extends Middleware
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
 
-            'logoPks' => url("storage/image/assets/logo-pks.png"),
+            'logoPks' => "image/assets/logo-pks.png",
             'slides' => [
                 [
                     'id' => 1,
-                    'image' => url("storage/image/assets/hero-1.jpg"),
+                    'image' => "image/assets/hero-1.jpg",
                     'title' => "Bersama PKS Bulukumba Membangun Daerah",
                     'description' =>
                     "Selamat datang di website resmi Partai Keadilan Sejahtera Bulukumba. Bersama kita wujudkan Bulukumba yang lebih baik, adil, dan sejahtera.",
                 ],
                 [
                     'id' => 2,
-                    'image' => url("storage/image/assets/hero-2.jpg"),
+                    'image' => "image/assets/hero-2.jpg",
                     'title' => "Berkhidmat Untuk Rakyat",
                     'description' =>
                     "PKS Bulukumba berkomitmen untuk selalu menghadirkan kebijakan yang pro-rakyat dan membela kepentingan masyarakat Bulukumba.",
                 ],
                 [
                     'id' => 3,
-                    'image' => url("storage/image/assets/hero-1.jpg"),
+                    'image' => "image/assets/hero-3.jpg",
                     'title' => "Membangun Bulukumba Bermartabat",
                     'description' =>
                     "Mari bersama-sama membangun Bulukumba yang bermartabat, sejahtera, dan berkeadilan untuk semua lapisan masyarakat.",

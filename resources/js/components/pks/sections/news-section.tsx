@@ -56,7 +56,7 @@ export default function NewsSection({ blogs }) {
                     className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
                 >
                     {blogs.map((item) => (
-                        <motion.div key={item.id} variants={item}>
+                        <motion.div key={item.slug} variants={item}>
                             <Card className="h-full gap-0 overflow-hidden py-0 transition-all duration-300 hover:shadow-lg">
                                 <div className="relative h-60 w-full overflow-hidden">
                                     <img

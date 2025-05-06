@@ -29,7 +29,7 @@ export default function Navbar() {
         <header className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${scrolled ? 'bg-white py-2 shadow-md' : 'bg-white py-4'}`}>
             <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
                 <Link href="/" className="flex items-center space-x-2">
-                    <img alt="Logo PKS" className="w-14" src={`/strorage/${logoPks}`} />
+                    <img alt="Logo PKS" className="w-14" src={`/storage/${logoPks}`} />
                     <span className="text-xl font-bold text-[#F47C20]">PKS Bulukumba</span>
                 </Link>
 

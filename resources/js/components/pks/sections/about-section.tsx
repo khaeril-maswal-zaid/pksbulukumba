@@ -23,7 +23,7 @@ export default function AboutSection({ about }) {
                         transition={{ duration: 0.8 }}
                     >
                         <motion.div className="relative" whileHover={{ rotate: 360 }} transition={{ duration: 1.5, ease: 'easeInOut' }}>
-                            <img src={logoPks} className="h-96 object-contain" />
+                            <img src={`/storage/${logoPks}`} className="h-96 object-contain" />
                         </motion.div>
                     </motion.div>
                     <motion.div

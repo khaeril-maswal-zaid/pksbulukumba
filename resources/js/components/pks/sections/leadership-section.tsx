@@ -52,7 +52,7 @@ export default function LeadershipSection({ leaders }) {
                         className="grid grid-cols-1 gap-6 md:grid-cols-4"
                     >
                         {leaders.map((leader) => (
-                            <motion.div key={leader.id} variants={item}>
+                            <motion.div key={leader.position} variants={item}>
                                 <Card className="gap-0 overflow-hidden border-t-4 border-[#F47C20] py-0 transition-all duration-300 hover:shadow-lg">
                                     <div className="h-hull relative w-full overflow-hidden">
                                         <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.4 }} className="w-full">
