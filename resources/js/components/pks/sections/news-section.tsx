@@ -98,8 +98,8 @@ export default function NewsSection({ blogs }) {
                 >
                     {blogs.map((item) => (
                         <motion.div key={item.id} variants={item}>
-                            <Card className="h-full gap-0 overflow-hidden transition-all duration-300 hover:shadow-lg">
-                                <div className="relative h-48 w-full overflow-hidden">
+                            <Card className="h-full gap-0 overflow-hidden py-0 transition-all duration-300 hover:shadow-lg">
+                                <div className="relative h-60 w-full overflow-hidden">
                                     <img
                                         src={item.picture1 || '/placeholder.svg'}
                                         alt={item.title}
@@ -113,7 +113,7 @@ export default function NewsSection({ blogs }) {
                                         {item.created_at}
                                     </CardDescription>
                                 </CardHeader>
-                                <CardContent className="p-4 pt-0">
+                                <CardContent className="p-4 pt-0 pb-3">
                                     <p className="line-clamp-5 text-sm text-gray-600">{item.excerpt}</p>
                                 </CardContent>
                                 <CardFooter className="p-4 pt-0">

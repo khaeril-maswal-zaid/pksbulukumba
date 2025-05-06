@@ -38,30 +38,36 @@ export default function LeadershipSection({ leaders }) {
                 >
                     <h2 className="mb-6 text-3xl font-bold text-black">Struktur Kepengurusan</h2>
                     <div className="mx-auto mb-8 h-1 w-20 bg-[#F47C20]"></div>
+                    <p className="mx-auto mb-8 max-w-2xl text-gray-600">
+                        Dewan Pengurus Daerah (DPD) Partai Keadilan Sejahtera (PKS) Kabupaten Bulukumba periode 2020-2025
+                    </p>
                 </motion.div>
 
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                    animate={inView ? 'show' : 'hidden'}
-                    className="grid grid-cols-1 gap-6 sm:grid-cols-4"
-                >
-                    {leaders.map((leader) => (
-                        <motion.div key={leader.id} variants={item}>
-                            <Card className="gap-0 overflow-hidden py-0 transition-all duration-300 hover:shadow-md">
-                                <div className="h-hull relative w-full overflow-hidden">
-                                    <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.4 }} className="w-full">
-                                        <img src={leader.image || '/placeholder.svg'} alt={leader.name} className="object-cover" />
-                                    </motion.div>
-                                </div>
-                                <CardHeader className="p-4 text-center">
-                                    <CardTitle className="text-lg">{leader.name}</CardTitle>
-                                    <CardDescription>{leader.position}</CardDescription>
-                                </CardHeader>
-                            </Card>
-                        </motion.div>
-                    ))}
-                </motion.div>
+                {/* Pimpinan Section */}
+                <div className="mb-12">
+                    <motion.div
+                        variants={container}
+                        initial="hidden"
+                        animate={inView ? 'show' : 'hidden'}
+                        className="grid grid-cols-1 gap-6 md:grid-cols-4"
+                    >
+                        {leaders.map((leader) => (
+                            <motion.div key={leader.id} variants={item}>
+                                <Card className="gap-0 overflow-hidden border-t-4 border-[#F47C20] py-0 transition-all duration-300 hover:shadow-lg">
+                                    <div className="h-hull relative w-full overflow-hidden">
+                                        <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.4 }} className="w-full">
+                                            <img src={leader.image || '/placeholder.svg'} alt={leader.name} className="object-cover" />
+                                        </motion.div>
+                                    </div>
+                                    <CardHeader className="p-4 text-center">
+                                        <CardTitle className="text-lg">{leader.name}</CardTitle>
+                                        <CardDescription className="font-medium text-[#F47C20]">{leader.position}</CardDescription>
+                                    </CardHeader>
+                                </Card>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
 
                 <div className="mt-12 text-center">
                     <Link href="/kepengurusan">
