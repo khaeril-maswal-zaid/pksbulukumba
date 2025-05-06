@@ -37,7 +37,7 @@ export default function HeroSection() {
                             index === currentSlide ? 'opacity-100' : 'pointer-events-none opacity-0'
                         }`}
                     >
-                        <img src={slide.image} className="w-full object-cover" />
+                        <img src={slide.image} className="h-full w-full object-cover" />
                         <div className="absolute inset-0 bg-black/40" />
                         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white">
                             <div className="max-w-3xl">
