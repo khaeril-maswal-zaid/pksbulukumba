@@ -56,7 +56,7 @@ export default function LeadershipSection({ leaders }) {
                                 <Card className="gap-0 overflow-hidden border-t-4 border-[#F47C20] py-0 transition-all duration-300 hover:shadow-lg">
                                     <div className="h-hull relative w-full overflow-hidden">
                                         <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.4 }} className="w-full">
-                                            <img src={`storage/${leader.image}` || '/placeholder.svg'} alt={leader.name} className="object-cover" />
+                                            <img src={`/storage/${leader.image}` || '/placeholder.svg'} alt={leader.name} className="object-cover" />
                                         </motion.div>
                                     </div>
                                     <CardHeader className="p-4 text-center">

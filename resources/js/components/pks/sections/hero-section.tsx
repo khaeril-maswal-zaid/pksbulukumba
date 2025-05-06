@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
     const { slides } = usePage().props;
-    console.log(slides);
 
     const [currentSlide, setCurrentSlide] = useState(0);
 
