@@ -79,4 +79,13 @@ class BlogController extends Controller
     {
         //
     }
+
+    public function admin()
+    {
+        $data = [
+            'blogs' => Blog::select(['title', 'slug', 'user_id', 'visit', 'created_at'])->with('athor')->latest()->paginate(10),
+        ];
+
+        return Inertia::render('admin/blog/page', $data);
+    }
 }

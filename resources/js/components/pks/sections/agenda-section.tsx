@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin } from 'lucide-react';
@@ -34,7 +34,7 @@ const agendaItems = [
     },
 ];
 
-export default function AgendaSection() {
+export default function AgendaSection({ agendas }) {
     const [ref, inView] = useInView({
         triggerOnce: true,
         threshold: 0.1,
@@ -74,28 +74,39 @@ export default function AgendaSection() {
                     animate={inView ? 'show' : 'hidden'}
                     className="grid grid-cols-1 gap-6 md:grid-cols-3"
                 >
-                    {agendaItems.map((item, index) => (
-                        <motion.div key={item.id} variants={item}>
-                            <Card className="h-full gap-0 overflow-hidden transition-all duration-300 hover:shadow-md">
-                                <CardHeader className="p-6">
-                                    <CardTitle className="text-xl">{item.title}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="p-6 pt-0">
-                                    <div className="space-y-4">
-                                        <div className="mt-1.5 flex items-center space-x-2 text-[#F47C20]">
-                                            <Calendar size={16} />
-                                            <CardDescription className="text-[#F47C20]">{item.date}</CardDescription>
+                    {agendas.map((agenda, index) => (
+                        <motion.div key={item.id || index} variants={item}>
+                            <Card
+                                key={index}
+                                className="slide-up group relative h-[280px] overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
+                            >
+                                {/* Background Image */}
+                                <div className="absolute inset-0">
+                                    <img
+                                        src={`/storage/${agenda.image}` || '/placeholder.svg'}
+                                        alt={agenda.title}
+                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30"></div>
+                                </div>
+
+                                {/* Content */}
+                                <CardContent className="relative z-10 flex h-full flex-col justify-end p-6 text-white">
+                                    <h3 className="mb-3 text-xl font-bold">{agenda.title}</h3>
+                                    <div className="mb-4 space-y-2">
+                                        <div className="flex items-start">
+                                            <Calendar className="text-primary-foreground mt-0.5 mr-2 h-4 w-4 opacity-80" />
+                                            <span className="text-sm text-gray-200">{agenda.date}</span>
                                         </div>
-                                        <motion.div className="flex items-start space-x-2" whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                                            <Clock size={18} className="mt-0.5 flex-shrink-0 text-gray-500" />
-                                            <span className="text-sm text-gray-600">{item.time}</span>
-                                        </motion.div>
-                                        <motion.div className="flex items-start space-x-2" whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                                            <MapPin size={18} className="mt-0.5 flex-shrink-0 text-gray-500" />
-                                            <span className="text-sm text-gray-600">{item.location}</span>
-                                        </motion.div>
+                                        <div className="flex items-start">
+                                            <Clock className="text-primary-foreground mt-0.5 mr-2 h-4 w-4 opacity-80" />
+                                            <span className="text-sm text-gray-200">{agenda.time}</span>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <MapPin className="text-primary-foreground mt-0.5 mr-2 h-4 w-4 opacity-80" />
+                                            <span className="text-sm text-gray-200">{agenda.location}</span>
+                                        </div>
                                     </div>
-                                    <p className="mt-4 text-gray-600">{item.description}</p>
                                 </CardContent>
                             </Card>
                         </motion.div>

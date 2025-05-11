@@ -103,8 +103,8 @@ export default function MapSection() {
                                 <div className="space-y-2">
                                     <p className="text-center text-gray-700">Kecamatan Bontotiro</p>
                                     <p className="text-center text-gray-700">Kecamatan Bonto Bahari</p>
-                                    <p className="text-center text-sm text-gray-500">5 Kursi DPRD</p>
-                                    <p className="text-center text-xs text-gray-500">1 Legislator PKS dari 5 kursi</p>
+                                    <p className="text-center text-sm text-gray-500">1 Legislator PKS dari 5 kursi</p>
+                                    <p className="text-center text-xs text-gray-500">Jumlah Pemilih: ~30.000</p>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +112,7 @@ export default function MapSection() {
 
                     <div className="mt-8 border border-[#F47C20] p-4">
                         <p className="text-center font-medium text-[#F47C20]">
-                            <span className="font-bold">Total Kursi DPRD Kabupaten Bulukumba:</span> 40 Kursi
+                            <span className="font-bold">Total 8 Kursi </span>Fraksi PKS di DPRD Kabupaten Bulukumba
                         </p>
                     </div>
                 </div>

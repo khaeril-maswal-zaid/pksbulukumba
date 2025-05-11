@@ -62,7 +62,7 @@ export default function NewsSection({ blogs }) {
                                     <img
                                         src={`/storage/${item.picture1}` || '/placeholder.svg'}
                                         alt={item.title}
-                                        className="object-cover transition-transform duration-500 hover:scale-110"
+                                        className="h-full object-cover transition-transform duration-500 hover:scale-110"
                                     />
                                 </div>
                                 <CardHeader className="p-5">

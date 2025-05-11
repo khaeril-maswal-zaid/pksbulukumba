@@ -16,10 +16,11 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Official PKS Bulukumba',
+            'email' => 'official8@bulukumba.pks.id',
         ]);
 
         $this->call(BlogSeeder::class);
+        $this->call(AgendaSeeder::class);
     }
 }
