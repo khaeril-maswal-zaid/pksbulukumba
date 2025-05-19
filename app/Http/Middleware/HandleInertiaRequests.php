@@ -59,7 +59,7 @@ class HandleInertiaRequests extends Middleware
             'slides' => [
                 [
                     'id' => 1,
-                    'image' => "image/assets/hero1.jpg",
+                    'image' => "image/assets/hero-1c.jpg",
                     'title' => "Bersama PKS Bulukumba Membangun Daerah",
                     'description' =>
                     "Selamat datang di website resmi Partai Keadilan Sejahtera Bulukumba. Bersama kita wujudkan Bulukumba yang lebih baik, adil, dan sejahtera.",
