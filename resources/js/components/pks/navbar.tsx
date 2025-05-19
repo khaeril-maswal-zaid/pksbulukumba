@@ -23,7 +23,8 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navigasi = ['Beranda', 'Tentang', 'Berita', 'Agenda', 'Peta Dapil', 'Kepengurusan', 'Galeri'];
+    const navigasi = ['Beranda', 'Tentang', 'Berita', 'Agenda', 'Kepengurusan', 'Galeri'];
+    const routes = ['/', '#tentang', route('blog.cards'), route('agenda.cards'), route('struktur.cards'), route('galery.cards')];
 
     return (
         <header className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${scrolled ? 'bg-white py-2 shadow-md' : 'bg-white py-4'}`}>
@@ -36,11 +37,7 @@ export default function Navbar() {
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex md:items-center md:space-x-6">
                     {navigasi.map((item, index) => (
-                        <Link
-                            key={index}
-                            href={`#${item.toLowerCase()}`}
-                            className="group relative text-sm font-medium text-gray-700 hover:text-[#F47C20]"
-                        >
+                        <Link key={index} href={routes[index]} className="group relative text-sm font-medium text-gray-700 hover:text-[#F47C20]">
                             {item}
                             <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#F47C20] transition-all duration-300 group-hover:w-full"></span>
                         </Link>

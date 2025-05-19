@@ -2,37 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
+use App\Models\Blog;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): Response
     {
-        //
-    }
+        $data = [
+            'blogs' => Blog::select(['title', 'slug', 'user_id', 'visit', 'category', 'created_at'])->with('author')->latest()->paginate(10),
+        ];
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreBlogRequest $request)
-    {
-        //
+        return Inertia::render('dashboard/blog/page', $data);
     }
 
     /**
@@ -46,30 +34,112 @@ class BlogController extends Controller
             'image' => asset('storage/' . $blog->picture1),
             'url' => route('blog.show', $blog),
         ];
-
         request()->attributes->set('og', $ogTags);
 
+        $kategory = ['News', 'Dakwah', 'Opini', 'The Story'];
+
+        $countKategory = [];
+        foreach ($kategory as $key => $value) {
+            $countKategory[] = Blog::where('category', $value)->count();
+        }
+
         $data = [
-            'blogDetail' => $blog,
-            'relatedNews' => Blog::select(['title', 'slug', 'excerpt', 'picture1', 'created_at'])->latest()->take(3)->get(),
+            'blogDetail' => $blog->load('author'),
+            'relatedNews' => Blog::select('title', 'slug', 'picture1', 'category', 'created_at')->whereNot('slug', $blog->slug)->latest()->take(3)->get(),
+            'kategory' =>  $kategory,
+            'countKategory' => $countKategory,
+            'tagsRandom' =>  Blog::inRandomOrder()->limit(2)->pluck('tags')
         ];
-        return Inertia::render('pks/berita/[slug]/page', $data);
+        return Inertia::render('pks/berita/detail', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Blog $blog)
+
+    public function store(StoreBlogRequest $request)
     {
-        //
+        $base64Image = $request->mainImage;
+        [$type, $data] = explode(';', $base64Image);
+        [, $extension] = explode('/', $type); // jpeg, png
+        [, $base64Data] = explode(',', $data);
+
+        $filename = uniqid() . '-' . Str::slug($request->nama) . '.' . $extension;
+
+        Storage::disk('public')->put("image/blog/{$filename}", base64_decode($base64Data));
+
+        $imagePath = "image/blog/{$filename}";
+
+        Blog::create([
+            'user_id' => Auth::id(),
+            'slug' => Str::slug($request->title, '-'),
+            'title' => $request->title,
+            'excerpt' => $request->description,
+            'body1' => $request->body1,
+            'body2' => $request->body2,
+            'picture1' => $imagePath,
+            'picture2' => '',
+            'picture3' => '',
+            'tags' => $request->tags,
+            'category' => $request->category,
+            'visit' => 50
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    public function cards()
+    {
+        $data = [
+            'Latest' => Blog::select('picture1', 'title', 'slug', 'category', 'created_at', 'excerpt')->take(8)->paginate()
+        ];
+
+        return Inertia::render('pks/berita/page', $data);
+    }
+
+    public function edit(Blog $blog): Response
+    {
+        $data = [
+            'blogs' => $blog,
+        ];
+
+        return Inertia::render('dashboard/blog/edit', $data);
+    }
+
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        //
+        $fotoInput = $request->input('mainImage');
+
+        // Cek apakah $fotoInput ini Base64 (diawali "data:image/…;base64,")
+        if (preg_match('/^data:image\/(\w+);base64,/', $fotoInput, $matches)) {
+            $base64Image = $request->mainImage;
+            [$type, $data] = explode(';', $base64Image);
+            [, $extension] = explode('/', $type); // jpeg, png
+            [, $base64Data] = explode(',', $data);
+
+            $filename =  Str::slug($request->title) . '-' . uniqid() . '.' . $extension;
+
+            Storage::disk('public')->put("image/blog/{$filename}", base64_decode($base64Data));
+
+            $imagePath = "image/blog/{$filename}";
+
+            // Hapus file gambar sebelumnnya jika ada
+            if ($blog->picture1 && Storage::disk('public')->exists($blog->picture1)) {
+                Storage::disk('public')->delete($blog->picture1);
+            }
+        } else {
+            // bukan Base64 → kemungkinan path lama yang tidak diubah
+            $imagePath = $fotoInput;
+        }
+
+        $blog->update([
+            'title' => $request->title,
+            'excerpt' => $request->description,
+            'body1' => $request->body1,
+            'body2' => $request->body2,
+            'picture1' => $imagePath,
+            'picture2' => '',
+            'picture3' => '',
+            'tags' => $request->tags,
+            'visit' => 50
+        ]);
+
+        return to_route('blog.index');
     }
 
     /**
@@ -77,15 +147,19 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
-    }
+        // Hapus file gambar jika ada
+        if ($blog->picture1 && Storage::disk('public')->exists($blog->picture1)) {
+            Storage::disk('public')->delete($blog->picture1);
+        }
 
-    public function admin()
-    {
-        $data = [
-            'blogs' => Blog::select(['title', 'slug', 'user_id', 'visit', 'created_at'])->with('athor')->latest()->paginate(10),
-        ];
+        if ($blog->picture2 && Storage::disk('public')->exists($blog->picture2)) {
+            Storage::disk('public')->delete($blog->picture2);
+        }
 
-        return Inertia::render('admin/blog/page', $data);
+        if ($blog->picture3 && Storage::disk('public')->exists($blog->picture3)) {
+            Storage::disk('public')->delete($blog->picture3);
+        }
+
+        $blog->delete();
     }
 }

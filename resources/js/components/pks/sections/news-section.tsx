@@ -62,8 +62,9 @@ export default function NewsSection({ blogs }) {
                                     <img
                                         src={`/storage/${item.picture1}` || '/placeholder.svg'}
                                         alt={item.title}
-                                        className="h-full object-cover transition-transform duration-500 hover:scale-110"
+                                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
                                     />
+                                    <div className="absolute top-2 right-2 rounded bg-[#F47C20] px-2 py-1 text-xs text-white">{item.category}</div>
                                 </div>
                                 <CardHeader className="p-5">
                                     <CardTitle className="text-lg">{item.title}</CardTitle>
@@ -86,7 +87,7 @@ export default function NewsSection({ blogs }) {
                 </motion.div>
 
                 <div className="mt-12 text-center">
-                    <Link href="/blog">
+                    <Link href={route('blog.cards')}>
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Lihat Semua Berita</Button>
                         </motion.div>

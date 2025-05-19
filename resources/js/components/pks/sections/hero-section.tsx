@@ -38,7 +38,7 @@ export default function HeroSection() {
                         }`}
                     >
                         <img src={`/storage/${slide.image}`} className="h-full w-full object-cover" />
-                        <div className="absolute inset-0 bg-black/40" />
+                        <div className="absolute inset-0 bg-black/60" />
                         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white">
                             <div className="max-w-3xl">
                                 <motion.h1

@@ -7,33 +7,6 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 
-const agendaItems = [
-    {
-        id: 1,
-        title: 'Rapat Koordinasi Kader PKS Bulukumba',
-        date: '15 Mei 2023',
-        time: '09:00 - 12:00 WITA',
-        location: 'Kantor DPD PKS Bulukumba',
-        description: 'Rapat koordinasi seluruh kader PKS Bulukumba untuk membahas program kerja semester II tahun 2023.',
-    },
-    {
-        id: 2,
-        title: 'Pelatihan Kepemimpinan Dasar',
-        date: '20-21 Mei 2023',
-        time: '08:00 - 16:00 WITA',
-        location: 'Aula Kantor Bupati Bulukumba',
-        description: 'Pelatihan kepemimpinan dasar untuk kader muda PKS Bulukumba dengan pemateri dari DPP PKS.',
-    },
-    {
-        id: 3,
-        title: 'Bakti Sosial dan Pengobatan Gratis',
-        date: '27 Mei 2023',
-        time: '08:00 - 14:00 WITA',
-        location: 'Desa Bontotiro, Kec. Bontotiro',
-        description: 'Kegiatan bakti sosial berupa pengobatan gratis dan pembagian sembako untuk masyarakat kurang mampu.',
-    },
-];
-
 export default function AgendaSection({ agendas }) {
     const [ref, inView] = useInView({
         triggerOnce: true,
@@ -114,7 +87,7 @@ export default function AgendaSection({ agendas }) {
                 </motion.div>
 
                 <div className="mt-12 text-center">
-                    <Link href="/agenda">
+                    <Link href={route('agenda.cards')}>
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Lihat Semua Agenda</Button>
                         </motion.div>

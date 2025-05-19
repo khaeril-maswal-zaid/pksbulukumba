@@ -15,17 +15,17 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Blog',
-        href: '/dashboard/blog',
+        href: route('blog.index'),
         icon: FileText, // Blog = tulisan = dokumen
     },
     {
         title: 'Struktur',
-        href: '/dashboard/struktur',
+        href: route('struktur.index'),
         icon: Users2, // Struktur organisasi = orang-orang
     },
     {
         title: 'Agenda',
-        href: '/dashboard/agenda',
+        href: route('agenda.index'),
         icon: CalendarDays, // Agenda = kalender / jadwal
     },
     {
@@ -35,7 +35,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Kontak PKS',
-        href: 'dashboard/kontak',
+        href: route('kontak.index'),
         icon: Phone, // Kontak = telepon
     },
 ];

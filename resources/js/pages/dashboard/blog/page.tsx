@@ -1,5 +1,5 @@
-import BlogPostModal from '@/components/admin/blog-post-modal';
-import BlogTable from '@/components/admin/blog-table';
+import BlogPostModal from '@/components/dashboard/blog-post-modal';
+import BlogTable from '@/components/dashboard/blog-table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import AppLayout from '@/layouts/app-layout';
@@ -22,7 +22,7 @@ export default function Dashboard({ blogs }: { blogs: any[] }) {
                 <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
                     <div className="border-b p-4">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-lg font-medium">Blog PKS Bulukumba</h2>
+                            <h2 className="text-lg font-medium">Blog Ubay Bin Kaab</h2>
                             <div className="flex items-center gap-2">
                                 <div className="relative">
                                     <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-gray-500" />

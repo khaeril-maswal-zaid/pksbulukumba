@@ -2,31 +2,34 @@
 
 import type React from 'react';
 
-import ImageCropper from '@/components/admin/image-cropper';
-import RichTextEditor from '@/components/admin/rich-text-editor';
+import { CropDialog } from '@/components/dashboard/crop-dialog';
+import RichTextEditor from '@/components/dashboard/rich-text-editor';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import { usePage } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
 import { CropIcon, Loader2, PlusCircle, Upload, X } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
 
-// Define validation schema
+// Definisikan skema validasi
 const blogPostSchema = z.object({
-    title: z.string().min(5, 'Title must be at least 5 characters').max(100, 'Title must be less than 100 characters'),
-    description: z.string().min(10, 'Description must be at least 10 characters').max(500, 'Description must be less than 500 characters'),
-    body1: z.string().min(20, 'Main content must be at least 20 characters'),
+    title: z.string().min(5, 'Judul harus terdiri dari minimal 5 karakter').max(100, 'Judul tidak boleh lebih dari 100 karakter'),
+    description: z.string().min(10, 'Deskripsi harus terdiri dari minimal 10 karakter').max(500, 'Deskripsi tidak boleh lebih dari 500 karakter'),
+    body1: z.string().min(20, 'Konten utama harus terdiri dari minimal 20 karakter'),
     body2: z.string().optional(),
-    tags: z.array(z.string()).min(1, 'At least one tag is required').max(5, 'Maximum 5 tags allowed'),
-    mainImage: z.any().refine((file) => file instanceof File, { message: 'Main image is required' }),
+    category: z.string().nonempty('Kategori wajib dipilih'),
+    tags: z.array(z.string()).min(1, 'Minimal 1 tag harus dipilih').max(5, 'Maksimal 5 tag yang diperbolehkan'),
+    // Jika ingin menjadikan mainImage wajib diunggah, gunakan kode ini:// mainImage: z.any().refine((file) => file instanceof File, {//     message: 'Gambar utama wajib diunggah',// }),
+    mainImage: z.any().optional(),
     subImage1: z.any().optional(),
     subImage2: z.any().optional(),
 });
@@ -43,20 +46,14 @@ export default function BlogPostModal() {
     const [description, setDescription] = useState('');
     const [body1, setBody1] = useState('');
     const [body2, setBody2] = useState('');
+    const [category, setCategory] = useState('');
 
     // Image states
-    const [mainImage, setMainImage] = useState<File | null>(null);
-    const [subImage1, setSubImage1] = useState<File | null>(null);
-    const [subImage2, setSubImage2] = useState<File | null>(null);
-    const [mainImagePreview, setMainImagePreview] = useState<string | null>(null);
-    const [subImage1Preview, setSubImage1Preview] = useState<string | null>(null);
-    const [subImage2Preview, setSubImage2Preview] = useState<string | null>(null);
+    const [mainImage, setMainImage] = useState('');
+    const [subImage1, setSubImage1] = useState('');
+    const [subImage2, setSubImage2] = useState('');
 
     // Cropping states
-    const [cropModalOpen, setCropModalOpen] = useState(false);
-    const [currentImageType, setCurrentImageType] = useState<'main' | 'sub1' | 'sub2' | null>(null);
-    const [imageToCrop, setImageToCrop] = useState<string | null>(null);
-
     const [tagInput, setTagInput] = useState('');
     const [tags, setTags] = useState<string[]>([]);
     const [activeTab, setActiveTab] = useState('media');
@@ -69,14 +66,92 @@ export default function BlogPostModal() {
     const [pulse, setPulse] = useState(false);
     const dialogRef = useRef<HTMLDivElement>(null);
 
+    const [errorsServer, setErrorsServer] = useState('');
+
+    //---------------------------------------------------
+
+    const [src, setSrc] = useState<string | null>(null);
+
+    const [cropDialogOpen, setCropDialogOpen] = useState(false);
+    const [completedCrop, setCompletedCrop] = useState(null);
+
+    const imgRef = useRef<HTMLImageElement | null>(null);
+    const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
+
     // Landscape aspect ratio (4:3)
     const aspectRatio = 4 / 3;
 
-    // Simulated admin user
-    const currentUser = {
-        name: 'Admin User',
-        email: 'admin@example.com',
+    const onImageLoad = useCallback((img: HTMLImageElement) => {
+        imgRef.current = img;
+        const width = img.width * 0.75;
+        const height = width * (3 / 4);
+        setCrop({
+            unit: 'px',
+            width,
+            height,
+            x: (img.width - width) / 2,
+            y: (img.height - height) / 2,
+            aspect: aspectRatio,
+        });
+        return false;
+    }, []);
+
+    const generateCrop = useCallback(() => {
+        if (!completedCrop || !imgRef.current || !previewCanvasRef.current) return;
+        const image = imgRef.current;
+        const canvas = previewCanvasRef.current;
+        const { width, height, x, y } = completedCrop;
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        canvas.width = width * scaleX;
+        canvas.height = height * scaleY;
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(image, x * scaleX, y * scaleY, width * scaleX, height * scaleY, 0, 0, width * scaleX, height * scaleY);
+        let base64 = canvas.toDataURL('image/jpeg', 1.0);
+        if (base64.length > 700000) base64 = canvas.toDataURL('image/jpeg', 0.8);
+        setMainImage(base64);
+    }, [completedCrop]);
+
+    const resetCrop = () => {
+        setSrc(null);
+        setMainImage('');
     };
+
+    const [crop, setCrop] = useState({
+        unit: '%',
+        width: 75,
+        height: 100,
+        x: 12.5,
+        y: 0,
+        aspect: aspectRatio,
+    });
+
+    const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files?.[0]) return;
+
+        const file = e.target.files[0];
+        if (file.size > 510 * 1024) {
+            toast({
+                title: `Gagal Upload Foto`,
+                description: `Ukuran foto tidak boleh melebihi 510 KB`,
+            });
+
+            e.target.value = '';
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+            setSrc(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+
+        setCropDialogOpen(true);
+    };
+
+    //----------------------------------------------------
 
     // Reset errors when inputs change
     useEffect(() => {
@@ -95,6 +170,9 @@ export default function BlogPostModal() {
         if (errors.tags && tags.length >= 1) {
             setErrors((prev) => ({ ...prev, tags: undefined }));
         }
+        if (errors.category && category.length >= 1) {
+            setErrors((prev) => ({ ...prev, category: undefined }));
+        }
     }, [title, description, body1, mainImage, tags, errors]);
 
     // Handle pulse effect
@@ -106,41 +184,6 @@ export default function BlogPostModal() {
             return () => clearTimeout(timer);
         }
     }, [pulse]);
-
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'main' | 'sub1' | 'sub2') => {
-        if (e.target.files && e.target.files[0]) {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                setImageToCrop(reader.result as string);
-                setCurrentImageType(type);
-                setCropModalOpen(true);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    };
-
-    const handleCroppedImage = (croppedImage: string, file: File) => {
-        if (currentImageType === 'main') {
-            setMainImage(file);
-            setMainImagePreview(croppedImage);
-            if (errors.mainImage) {
-                setErrors((prev) => ({ ...prev, mainImage: undefined }));
-            }
-        } else if (currentImageType === 'sub1') {
-            setSubImage1(file);
-            setSubImage1Preview(croppedImage);
-        } else if (currentImageType === 'sub2') {
-            setSubImage2(file);
-            setSubImage2Preview(croppedImage);
-        }
-
-        setCropModalOpen(false);
-        setCurrentImageType(null);
-        setImageToCrop(null);
-    };
 
     const handleTagKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         // Create tag when semicolon is pressed
@@ -199,6 +242,7 @@ export default function BlogPostModal() {
                 description,
                 body1,
                 body2,
+                category,
                 tags,
                 mainImage,
                 subImage1,
@@ -247,33 +291,35 @@ export default function BlogPostModal() {
             return;
         }
 
-        // Create form data object with all fields
-        const formData = {
-            title,
-            description,
-            body1, // This will contain HTML from the rich text editor
-            body2, // This will contain HTML from the rich text editor
-            mainImage,
-            subImage1,
-            subImage2,
-            tags,
-        };
-
-        console.log('Form submitted:', formData);
-
-        // Simulate API call
-        setTimeout(() => {
-            // Simulate successful API response
-            toast({
-                title: 'Success!',
-                description: 'Blog post created successfully',
-            });
-
-            // Reset form and close modal
-            resetForm();
-            setOpen(false);
-            setIsSubmitting(false);
-        }, 2000); // 2 second delay to simulate network request
+        router.post(
+            route('blog.store'),
+            {
+                title,
+                description,
+                body1, // This will contain HTML from the rich text editor
+                body2, // This will contain HTML from the rich text editor
+                mainImage,
+                subImage1,
+                subImage2,
+                tags,
+                category,
+            },
+            {
+                onError: (e) => {
+                    setErrorsServer(e);
+                    setIsSubmitting(false);
+                },
+                onSuccess: () => {
+                    toast({
+                        title: 'Berhasil!',
+                        description: 'Blog berhasil dipublis',
+                    });
+                    resetForm();
+                    setOpen(false);
+                    setIsSubmitting(false);
+                },
+            },
+        );
     };
 
     const resetForm = () => {
@@ -281,12 +327,10 @@ export default function BlogPostModal() {
         setDescription('');
         setBody1('');
         setBody2('');
-        setMainImage(null);
-        setSubImage1(null);
-        setSubImage2(null);
-        setMainImagePreview(null);
-        setSubImage1Preview(null);
-        setSubImage2Preview(null);
+        setCategory('');
+        setMainImage('');
+        setSubImage1('');
+        setSubImage2('');
         setTagInput('');
         setTags([]);
         setActiveTab('media');
@@ -311,7 +355,7 @@ export default function BlogPostModal() {
                 Create Post
             </Button>
 
-            <Dialog open={open} onOpenChange={handleOpenChange}>
+            <Dialog open={open} onOpenChange={handleOpenChange} modal={false}>
                 <DialogContent
                     className={'overflow-hidden p-0 transition-all duration-300 sm:max-w-[1000px]'}
                     ref={dialogRef}
@@ -344,6 +388,17 @@ export default function BlogPostModal() {
                     </DialogHeader>
 
                     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                        {/* Menampilkan list error */}
+                        {Object.keys(errorsServer).length > 0 && (
+                            <div className="mb-4 rounded bg-red-100 p-4 text-red-700">
+                                <ul className="list-inside list-disc">
+                                    {Object.values(errorsServer).map((error, index) => (
+                                        <li key={index}>{error}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
                         <div className="px-6">
                             <TabsList className="grid w-full grid-cols-2">
                                 <TabsTrigger value="media">Step 1</TabsTrigger>
@@ -400,7 +455,7 @@ export default function BlogPostModal() {
                                                 </div>
                                             </div>
 
-                                            {/* Right column - Images */}
+                                            {/*  Right column - Images */}
                                             <div className="space-y-6">
                                                 <div className="space-y-2">
                                                     <Label className="text-sm font-medium">Images (4:3 landscape ratio)</Label>
@@ -416,16 +471,16 @@ export default function BlogPostModal() {
                                                                 <div
                                                                     className={cn(
                                                                         'hover:border-primary/50 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-2 transition-colors',
-                                                                        mainImagePreview ? 'border-primary' : 'border-gray-300',
-                                                                        errors.mainImage && !mainImagePreview && 'border-destructive',
+                                                                        mainImage ? 'border-primary' : 'border-gray-300',
+                                                                        errors.mainImage && !mainImage && 'border-destructive',
                                                                     )}
                                                                     // style={{ height: '180px' }}
                                                                     onClick={() => document.getElementById('mainImage')?.click()}
                                                                 >
-                                                                    {mainImagePreview ? (
+                                                                    {mainImage ? (
                                                                         <div className="relative h-full w-full">
                                                                             <img
-                                                                                src={mainImagePreview || '/placeholder.svg'}
+                                                                                src={mainImage || '/placeholder.svg'}
                                                                                 alt="Main preview"
                                                                                 className="h-full w-full rounded-md object-cover"
                                                                                 style={{ aspectRatio: `${aspectRatio}`, objectFit: 'cover' }}
@@ -440,11 +495,6 @@ export default function BlogPostModal() {
                                                                                         e.stopPropagation();
                                                                                         if (mainImage) {
                                                                                             const reader = new FileReader();
-                                                                                            reader.onload = () => {
-                                                                                                setImageToCrop(reader.result as string);
-                                                                                                setCurrentImageType('main');
-                                                                                                setCropModalOpen(true);
-                                                                                            };
                                                                                             reader.readAsDataURL(mainImage);
                                                                                         }
                                                                                     }}
@@ -458,8 +508,7 @@ export default function BlogPostModal() {
                                                                                     className="h-6 w-6"
                                                                                     onClick={(e) => {
                                                                                         e.stopPropagation();
-                                                                                        setMainImage(null);
-                                                                                        setMainImagePreview(null);
+                                                                                        mainImage('');
                                                                                     }}
                                                                                 >
                                                                                     <X className="h-3 w-3" />
@@ -477,11 +526,11 @@ export default function BlogPostModal() {
                                                                     id="mainImage"
                                                                     type="file"
                                                                     accept="image/*"
-                                                                    onChange={(e) => handleImageChange(e, 'main')}
+                                                                    onChange={(e) => onSelectFile(e, 'main')}
                                                                     required
                                                                     className="hidden"
                                                                 />
-                                                                {errors.mainImage && !mainImagePreview && (
+                                                                {errors.mainImage && !setMainImage && (
                                                                     <p className="text-destructive mt-1 text-xs">{errors.mainImage}</p>
                                                                 )}
                                                             </div>
@@ -496,15 +545,15 @@ export default function BlogPostModal() {
                                                                     <div
                                                                         className={cn(
                                                                             'hover:border-primary/50 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-2 transition-colors',
-                                                                            subImage1Preview ? 'border-primary' : 'border-gray-300',
+                                                                            subImage1 ? 'border-primary' : 'border-gray-300',
                                                                         )}
                                                                         // style={{ height: '120px' }}
                                                                         onClick={() => document.getElementById('subImage1')?.click()}
                                                                     >
-                                                                        {subImage1Preview ? (
+                                                                        {subImage1 ? (
                                                                             <div className="relative h-full w-full">
                                                                                 <img
-                                                                                    src={subImage1Preview || '/placeholder.svg'}
+                                                                                    src={subImage1 || '/placeholder.svg'}
                                                                                     alt="Sub image 1 preview"
                                                                                     className="h-full w-full rounded-md object-cover"
                                                                                     style={{ aspectRatio: `${aspectRatio}`, objectFit: 'cover' }}
@@ -519,11 +568,6 @@ export default function BlogPostModal() {
                                                                                             e.stopPropagation();
                                                                                             if (subImage1) {
                                                                                                 const reader = new FileReader();
-                                                                                                reader.onload = () => {
-                                                                                                    setImageToCrop(reader.result as string);
-                                                                                                    setCurrentImageType('sub1');
-                                                                                                    setCropModalOpen(true);
-                                                                                                };
                                                                                                 reader.readAsDataURL(subImage1);
                                                                                             }
                                                                                         }}
@@ -537,8 +581,7 @@ export default function BlogPostModal() {
                                                                                         className="h-6 w-6"
                                                                                         onClick={(e) => {
                                                                                             e.stopPropagation();
-                                                                                            setSubImage1(null);
-                                                                                            setSubImage1Preview(null);
+                                                                                            setSubImage1('');
                                                                                         }}
                                                                                     >
                                                                                         <X className="h-3 w-3" />
@@ -556,7 +599,7 @@ export default function BlogPostModal() {
                                                                         id="subImage1"
                                                                         type="file"
                                                                         accept="image/*"
-                                                                        onChange={(e) => handleImageChange(e, 'sub1')}
+                                                                        onChange={(e) => onSelectFile(e, 'sub1')}
                                                                         className="hidden"
                                                                     />
                                                                 </div>
@@ -570,15 +613,15 @@ export default function BlogPostModal() {
                                                                     <div
                                                                         className={cn(
                                                                             'hover:border-primary/50 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-2 transition-colors',
-                                                                            subImage2Preview ? 'border-primary' : 'border-gray-300',
+                                                                            subImage2 ? 'border-primary' : 'border-gray-300',
                                                                         )}
                                                                         // style={{ height: '120px' }}
                                                                         onClick={() => document.getElementById('subImage2')?.click()}
                                                                     >
-                                                                        {subImage2Preview ? (
+                                                                        {subImage2 ? (
                                                                             <div className="relative h-full w-full">
                                                                                 <img
-                                                                                    src={subImage2Preview || '/placeholder.svg'}
+                                                                                    src={subImage2 || '/placeholder.svg'}
                                                                                     alt="Sub image 2 preview"
                                                                                     className="h-full w-full rounded-md object-cover"
                                                                                     style={{ aspectRatio: `${aspectRatio}`, objectFit: 'cover' }}
@@ -593,11 +636,7 @@ export default function BlogPostModal() {
                                                                                             e.stopPropagation();
                                                                                             if (subImage2) {
                                                                                                 const reader = new FileReader();
-                                                                                                reader.onload = () => {
-                                                                                                    setImageToCrop(reader.result as string);
-                                                                                                    setCurrentImageType('sub2');
-                                                                                                    setCropModalOpen(true);
-                                                                                                };
+
                                                                                                 reader.readAsDataURL(subImage2);
                                                                                             }
                                                                                         }}
@@ -630,7 +669,7 @@ export default function BlogPostModal() {
                                                                         id="subImage2"
                                                                         type="file"
                                                                         accept="image/*"
-                                                                        onChange={(e) => handleImageChange(e, 'sub2')}
+                                                                        onChange={(e) => onSelectFile(e, 'sub2')}
                                                                         className="hidden"
                                                                     />
                                                                 </div>
@@ -647,8 +686,32 @@ export default function BlogPostModal() {
                                             {/* Left sidebar - Tags */}
                                             <div className="col-span-12 space-y-6 md:col-span-3">
                                                 <div className="space-y-2">
+                                                    <Label htmlFor="category7" className="text-sm font-medium">
+                                                        Kategori Artikel <span className="text-red-500">*</span>
+                                                    </Label>
+                                                    <Select value={category} onValueChange={setCategory}>
+                                                        <SelectTrigger id="category7" className={cn(errors.category && 'border-destructive')}>
+                                                            <SelectValue placeholder="Pilih kategori" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectItem className="hover:bg-muted transition-none" value="News">
+                                                                News
+                                                            </SelectItem>
+                                                            <SelectItem className="hover:bg-muted transition-none" value="Dakwah">
+                                                                Dakwah
+                                                            </SelectItem>
+                                                            <SelectItem className="hover:bg-muted transition-none" value="The Story">
+                                                                The Story
+                                                            </SelectItem>
+                                                        </SelectContent>
+                                                    </Select>
+                                                    {errors.category && <p className="text-destructive text-xs">{errors.category}</p>}
+                                                </div>
+
+                                                <div className="space-y-2">
                                                     <Label htmlFor="tags" className={cn('text-sm font-medium', errors.tags && 'text-destructive')}>
-                                                        Tags <span className="text-red-500">*</span> (max 5, type and press ; to add)
+                                                        Tags <span className="text-red-500">*</span> (Maksimal 5, ketik lalu tekan ; untuk
+                                                        menambahkan)
                                                     </Label>
                                                     <div className="flex flex-col space-y-2">
                                                         <Input
@@ -740,12 +803,21 @@ export default function BlogPostModal() {
                 </DialogContent>
             </Dialog>
 
-            {/* Image Cropper Modal */}
-            <ImageCropper
-                open={cropModalOpen}
-                onOpenChange={setCropModalOpen}
-                imageUrl={imageToCrop}
-                onCropComplete={handleCroppedImage}
+            <CropDialog
+                open={cropDialogOpen}
+                onClose={() => {
+                    setCropDialogOpen(false);
+                }}
+                onCropDone={(base64) => {
+                    setMainImage(base64);
+                }}
+                src={src!}
+                crop={crop}
+                setCrop={setCrop}
+                setCompletedCrop={setCompletedCrop}
+                onImageLoad={onImageLoad}
+                generateCrop={generateCrop}
+                previewCanvasRef={previewCanvasRef}
                 aspectRatio={aspectRatio}
             />
         </>

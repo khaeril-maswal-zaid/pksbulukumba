@@ -3,11 +3,11 @@ import Navbar from '@/components/pks/navbar';
 import LeadershipSidebar from '@/components/pks/news/leadership-sidebar';
 import NewsContent from '@/components/pks/news/news-content';
 
-export default function NewsPage() {
+export default function NewsPage({ Latest }) {
     return (
         <>
             <Navbar />
-            <div className="min-h-screen bg-white">
+            <div className="mb-7 min-h-screen bg-white">
                 {/* Breadcrumb */}
                 <div className="border-b bg-gray-50 py-4">
                     <div className="container mx-auto px-4">
@@ -26,7 +26,7 @@ export default function NewsPage() {
                         {/* Main Content - Left Column */}
                         <div className="lg:w-2/3">
                             <h1 className="mb-8 text-3xl font-bold md:text-4xl">Berita Terbaru</h1>
-                            <NewsContent />
+                            <NewsContent Latest={Latest} />
                         </div>
 
                         {/* Sidebar - Right Column */}

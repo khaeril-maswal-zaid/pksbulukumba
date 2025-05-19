@@ -39,7 +39,7 @@ export default function LeadershipSection({ leaders }) {
                     <h2 className="mb-6 text-3xl font-bold text-black">Struktur Kepengurusan</h2>
                     <div className="mx-auto mb-8 h-1 w-20 bg-[#F47C20]"></div>
                     <p className="mx-auto mb-8 max-w-2xl text-gray-600">
-                        Dewan Pengurus Daerah (DPD) Partai Keadilan Sejahtera (PKS) Kabupaten Bulukumba periode 2020-2025
+                        Dewan Pengurus Daerah (DPD) Partai Keadilan Sejahtera (PKS) Kabupaten Bulukumba periode 2024-2029
                     </p>
                 </motion.div>
 
@@ -70,7 +70,7 @@ export default function LeadershipSection({ leaders }) {
                 </div>
 
                 <div className="mt-12 text-center">
-                    <Link href="/kepengurusan">
+                    <Link href={route('struktur.cards')}>
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Lihat Struktur Lengkap</Button>
                         </motion.div>

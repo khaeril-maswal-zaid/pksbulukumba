@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agendas', function (Blueprint $table) {
+        Schema::create('strukturs', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('time');
-            $table->date('date');
-            $table->string('location');
-            $table->string('image');
+            $table->string('name');
+            $table->string('no_hp');
+            $table->string('role');
+            $table->string('keterangan');
+            $table->boolean('main')->default(false);
+            $table->string('image')->default('image/structure/custom-struktur.jpg');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agendas');
+        Schema::dropIfExists('strukturs');
     }
 };

@@ -5,31 +5,6 @@ import { usePage } from '@inertiajs/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const leadershipData = [
-    {
-        id: 1,
-        name: 'H. Ahmad Fauzan, S.H.',
-        position: 'Ketua DPD PKS Bulukumba',
-        image: '/placeholder.svg?height=400&width=300',
-        description: 'Memimpin DPD PKS Bulukumba sejak tahun 2020. Aktif dalam berbagai kegiatan sosial dan politik di Kabupaten Bulukumba.',
-    },
-    {
-        id: 2,
-        name: 'Hj. Siti Rahmah, M.Pd.',
-        position: 'Sekretaris DPD PKS Bulukumba',
-        image: '/placeholder.svg?height=400&width=300',
-        description:
-            'Bertanggung jawab atas administrasi dan kesekretariatan DPD PKS Bulukumba. Juga aktif dalam bidang pendidikan dan pemberdayaan perempuan.',
-    },
-    {
-        id: 3,
-        name: 'H. Muhammad Ridwan, S.E.',
-        position: 'Bendahara DPD PKS Bulukumba',
-        image: '/placeholder.svg?height=400&width=300',
-        description: 'Mengelola keuangan DPD PKS Bulukumba. Seorang pengusaha sukses yang aktif mendukung program pemberdayaan ekonomi masyarakat.',
-    },
-];
-
 export default function LeadershipSidebar() {
     const { leaders } = usePage().props;
 
@@ -57,7 +32,7 @@ export default function LeadershipSidebar() {
                 <h2 className="text-center text-xl font-bold">Struktur Kepengurusan</h2>
             </div>
 
-            <div className="relative h-[calc(100%-64px)]">
+            <div className="relative mb-7 h-[calc(100%-64px)] pb-7">
                 {leaders.map((leader, index) => (
                     <Card
                         key={leader.id}
@@ -69,10 +44,10 @@ export default function LeadershipSidebar() {
                             <div className="relative mx-auto h-full w-full overflow-hidden">
                                 <img src={`/storage/${leader.image}`} className="h-full w-full object-cover object-top" />
                             </div>
-                            <div className="flex flex-grow flex-col p-6">
+                            <div className="flex flex-grow flex-col py-6 pt-6">
                                 <h3 className="mb-2 text-center text-xl font-bold">{leader.name}</h3>
-                                <p className="mb-4 text-center text-[#F47C20]">{leader.position}</p>
-                                <p className="flex-grow text-center text-gray-600">{leader.description}</p>
+                                <p className="text-center text-[#F47C20]">{leader.position}</p>
+                                {/* <p className="flex-grow text-center text-gray-600">{leader.description}</p> */}
                             </div>
                         </div>
                     </Card>

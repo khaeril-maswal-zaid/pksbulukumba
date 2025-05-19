@@ -30,6 +30,8 @@ interface NewsDetailProps {
 }
 
 export default function NewsDetail({ news, relatedNews }: NewsDetailProps) {
+    console.log(news);
+
     const [copied, setCopied] = useState(false);
 
     const copyToClipboard = () => {
@@ -108,7 +110,7 @@ export default function NewsDetail({ news, relatedNews }: NewsDetailProps) {
                             </div>
                             <div className="flex items-center">
                                 <User className="mr-1 h-4 w-4" />
-                                <span>{news.author || 'Official PKS Bulukumba'}</span>
+                                <span>{news.author.name || 'Official PKS Bulukumba'}</span>
                             </div>
                             <div className="flex items-center">
                                 <Tag className="mr-1 h-4 w-4" />

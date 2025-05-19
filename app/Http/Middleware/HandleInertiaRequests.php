@@ -6,6 +6,7 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
+use App\Models\Kontak;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -42,6 +43,8 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'name' => config('app.name'),
+            'contact' =>  Kontak::select("name", 'value', 'link', 'icon')->where('label', 'wa')->orWhere('label', 'email')->get(),
+            'alamat' => "Jln. Poros Manyampa - Palangisan Kalikia, Desa Manyampa Kec. Ujung Loe Kab. Bulukumba",
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
                 'user' => $request->user(),
@@ -56,21 +59,21 @@ class HandleInertiaRequests extends Middleware
             'slides' => [
                 [
                     'id' => 1,
-                    'image' => "image/assets/hero-1.jpg",
+                    'image' => "image/assets/hero1.jpg",
                     'title' => "Bersama PKS Bulukumba Membangun Daerah",
                     'description' =>
                     "Selamat datang di website resmi Partai Keadilan Sejahtera Bulukumba. Bersama kita wujudkan Bulukumba yang lebih baik, adil, dan sejahtera.",
                 ],
                 [
                     'id' => 2,
-                    'image' => "image/assets/hero-2.jpg",
+                    'image' => "image/assets/hero2.jpg",
                     'title' => "Berkhidmat Untuk Rakyat",
                     'description' =>
                     "PKS Bulukumba berkomitmen untuk selalu menghadirkan kebijakan yang pro-rakyat dan membela kepentingan masyarakat Bulukumba.",
                 ],
                 [
                     'id' => 3,
-                    'image' => "image/assets/hero-3.jpg",
+                    'image' => "image/assets/hero3.jpg",
                     'title' => "Membangun Bulukumba Bermartabat",
                     'description' =>
                     "Mari bersama-sama membangun Bulukumba yang bermartabat, sejahtera, dan berkeadilan untuk semua lapisan masyarakat.",
@@ -78,8 +81,8 @@ class HandleInertiaRequests extends Middleware
             ],
             'leaders' => [
                 ['id' => 1, 'name' => "A. Muh. Sabri Mustari, SS", 'position' => "Ketua DPD PKS Bulukumba", 'image' => "image/structur/a-muh-sabri-mustari-ss.JPG", "description" => 'Memimpin DPD PKS Bulukumba sejak tahun 2025. Aktif dalam berbagai kegiatan sosial dan politik di Kabupaten Bulukumba.',],
-                ['id' => 2, 'name' => "Dr. Supriadi, Ph. D", 'position' => "Sekretaris DPD PKS Bulukumba", 'image' => "image/structur/dr-supriadi-ph-d.JPG", "description" => 'Bertanggung jawab atas administrasi dan kesekretariatan DPD PKS Bulukumba. Juga aktif dalam bidang pendidikan dan pemberdayaan perempuan.'],
-                ['id' => 3, 'name' => "Ahmad Rasyidi", 'position' => "Bendahara DPD PKS Bulukumba", 'image' => "image/structur/ahmad-rasyidi.JPG", "description" => 'Mengelola keuangan DPD PKS Bulukumba. Seorang pengusaha sukses yang aktif mendukung program pemberdayaan ekonomi masyarakat.'],
+                ['id' => 2, 'name' => "Dr. Supriadi, Ph. D", 'position' => "Sekretaris", 'image' => "image/structur/dr-supriadi-ph-d.JPG", "description" => 'Bertanggung jawab atas administrasi dan kesekretariatan DPD PKS Bulukumba. Juga aktif dalam bidang pendidikan dan pemberdayaan perempuan.'],
+                ['id' => 3, 'name' => "Ahmad Rasyidi", 'position' => "Bendahara", 'image' => "image/structur/ahmad-rasyidi.JPG", "description" => 'Mengelola keuangan DPD PKS Bulukumba. Seorang pengusaha sukses yang aktif mendukung program pemberdayaan ekonomi masyarakat.'],
             ],
         ];
     }

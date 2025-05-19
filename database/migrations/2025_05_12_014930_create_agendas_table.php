@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('strukturs', function (Blueprint $table) {
+        Schema::create('agendas', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->date('date');
+            $table->string('time');
+            $table->string('location');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('strukturs');
+        Schema::dropIfExists('agendas');
     }
 };
