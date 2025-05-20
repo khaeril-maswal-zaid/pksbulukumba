@@ -24,7 +24,7 @@ class BlogSeeder extends Seeder
                 'picture1' => 'image/blog/682bd61045572-.png',
                 'picture2' => 'default.png',
                 'picture3' => 'default.png',
-                'tags' => ["Konsolidasi Prtai", "Kunjungan Politik", "Silaturahmi Legislatif", "Kolaborasi Aleg dan Masyarakat", "Pembangunan Partai"],
+                'tags' => ["Konsolidasi Partai", "Kunjungan Politik", "Silaturahmi Legislatif", "Kolaborasi Aleg dan Masyarakat", "Pembangunan Partai"],
                 'category' => 'News',
                 'visit' => 50,
             ],
@@ -39,7 +39,7 @@ class BlogSeeder extends Seeder
                 'picture2' => 'default.png',
                 'picture3' => 'default.png',
                 'tags' => ["Aleg", "Cinta", "Bulukumba", "PKS"],
-                'category' => 'News',
+                'category' => 'Edukasi Poltik',
                 'visit' => 50,
             ],
             [
@@ -53,7 +53,7 @@ class BlogSeeder extends Seeder
                 'picture2' => 'default.png',
                 'picture3' => 'default.png',
                 'tags' => ['Jasadiyah', 'Sehat', 'Kader'],
-                'category' => 'News',
+                'category' => 'Inspirasi',
                 'visit' => 50,
             ],
             [

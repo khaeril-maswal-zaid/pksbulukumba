@@ -697,11 +697,17 @@ export default function BlogPostModal() {
                                                             <SelectItem className="hover:bg-muted transition-none" value="News">
                                                                 News
                                                             </SelectItem>
-                                                            <SelectItem className="hover:bg-muted transition-none" value="Dakwah">
-                                                                Dakwah
+                                                            <SelectItem className="hover:bg-muted transition-none" value="Opini">
+                                                                Opini
                                                             </SelectItem>
-                                                            <SelectItem className="hover:bg-muted transition-none" value="The Story">
-                                                                The Story
+                                                            <SelectItem className="hover:bg-muted transition-none" value="Aspirasi">
+                                                                Aspirasi
+                                                            </SelectItem>
+                                                            <SelectItem className="hover:bg-muted transition-none" value="Edukasi Politik">
+                                                                Edukasi Politik
+                                                            </SelectItem>
+                                                            <SelectItem className="hover:bg-muted transition-none" value="Inspirasi">
+                                                                Inspirasi
                                                             </SelectItem>
                                                         </SelectContent>
                                                     </Select>

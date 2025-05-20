@@ -101,7 +101,7 @@ export default function GallerySection({ gallery }) {
                 </motion.div>
 
                 <div className="mt-12 text-center">
-                    <Link href="/galeri/semua">
+                    <Link href={route('galery.cards')}>
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Lihat Lebih Banyak Foto</Button>
                         </motion.div>

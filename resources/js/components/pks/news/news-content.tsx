@@ -6,7 +6,7 @@ export default function NewsContent({ Latest }) {
     return (
         <div>
             {/* Category Filter */}
-            <div className="mb-8">
+            {/* <div className="mb-8">
                 <div className="flex flex-wrap gap-2">
                     <button className="rounded-md bg-[#F47C20] px-4 py-2 text-white">Semua</button>
                     <button className="rounded-md bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200">Politik</button>
@@ -15,7 +15,7 @@ export default function NewsContent({ Latest }) {
                     <button className="rounded-md bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200">Pendidikan</button>
                     <button className="rounded-md bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200">Kaderisasi</button>
                 </div>
-            </div>
+            </div> */}
 
             {/* News Grid */}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -45,7 +45,7 @@ export default function NewsContent({ Latest }) {
             </div>
 
             {/* Pagination */}
-            <div className="mt-8 flex justify-center">
+            {/* <div className="mt-8 flex justify-center">
                 <div className="flex space-x-1">
                     <button className="rounded-md bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200">&laquo; Sebelumnya</button>
                     <button className="rounded-md bg-[#F47C20] px-4 py-2 text-white">1</button>
@@ -53,7 +53,7 @@ export default function NewsContent({ Latest }) {
                     <button className="rounded-md bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200">3</button>
                     <button className="rounded-md bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200">Selanjutnya &raquo;</button>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

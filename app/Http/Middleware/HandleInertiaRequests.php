@@ -73,7 +73,7 @@ class HandleInertiaRequests extends Middleware
                 ],
                 [
                     'id' => 3,
-                    'image' => "image/assets/hero-3b.jpg",
+                    'image' => "image/assets/hero-1c.jpg",
                     'title' => "Membangun Bulukumba Bermartabat",
                     'description' =>
                     "Mari bersama-sama membangun Bulukumba yang bermartabat, sejahtera, dan berkeadilan untuk semua lapisan masyarakat.",
