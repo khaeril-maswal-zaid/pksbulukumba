@@ -26,7 +26,7 @@ class BlogSeeder extends Seeder
                 'picture3' => 'default.png',
                 'tags' => ["Konsolidasi Partai", "Kunjungan Politik", "Silaturahmi Legislatif", "Kolaborasi Aleg dan Masyarakat", "Pembangunan Partai"],
                 'category' => 'News',
-                'visit' => 50,
+                'visit' => 71,
             ],
             [
                 'user_id' => 1,
@@ -140,7 +140,7 @@ class BlogSeeder extends Seeder
                 'picture2' => $data['picture2'],
                 'picture3' => $data['picture3'],
                 'tags' => $data['tags'],
-                'category' => 'News',
+                'category' => $data['category'],
                 'visit' => $data['visit'],
             ]);
         }
