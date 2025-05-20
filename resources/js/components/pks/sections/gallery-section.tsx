@@ -39,7 +39,7 @@ export default function GallerySection({ gallery }) {
     };
 
     return (
-        <section id="galeri" className="bg-gray-50 py-16" ref={ref}>
+        <section id="galeri" className="bg-gray-50 py-5 md:py-16" ref={ref}>
             <div className="container mx-auto px-4">
                 <motion.div
                     className="mb-12 text-center"
@@ -67,10 +67,7 @@ export default function GallerySection({ gallery }) {
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                             >
                                 <div className="h-full w-full overflow-hidden">
-                                    <img
-                                        src={`/storage/${image?.path}?v=ll`}
-                                        className="object-cover transition-transform duration-500 hover:scale-110"
-                                    />
+                                    <img src={`/storage/${image?.path}`} className="object-cover transition-transform duration-500 hover:scale-110" />
                                 </div>
                             </motion.div>
                         ))}

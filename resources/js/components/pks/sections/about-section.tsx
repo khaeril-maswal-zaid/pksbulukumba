@@ -13,7 +13,7 @@ export default function AboutSection({ about }) {
     const { logoPks } = usePage().props;
 
     return (
-        <section id="tentang" className="bg-white py-16" ref={ref}>
+        <section id="tentang" className="bg-white py-5 md:py-16" ref={ref}>
             <div className="container mx-auto px-4">
                 <div className="flex flex-col items-center md:flex-row md:space-x-8">
                     <motion.div

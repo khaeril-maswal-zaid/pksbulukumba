@@ -29,7 +29,7 @@ export default function AgendaSection({ agendas }) {
     };
 
     return (
-        <section id="agenda" className="bg-white py-16" ref={ref}>
+        <section id="agenda" className="bg-white py-12 md:py-16" ref={ref}>
             <div className="container mx-auto px-4">
                 <motion.div
                     className="mb-12 text-center"

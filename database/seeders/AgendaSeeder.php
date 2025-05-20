@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Agenda;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AgendaSeeder extends Seeder
@@ -22,7 +21,7 @@ class AgendaSeeder extends Seeder
                 "image"  => "image/agenda/kampanye-calon-bupati-usungan-pks-kabupaten-bulukumba.png"
             ],
             [
-                "title"  => "Pawai Pengawalan Pendaftaran Calon Bupati ke KPU oleh PKS dan Koalisi Partai Politik",
+                "title"  => "Pawai Pendaftaran Calon Bupati ke KPU oleh PKS dan Koalisi Partai Politik",
                 "time"   => "08:00 WITA",
                 "date"   => "2025-07-05",
                 "location" => "Kantor DPD PKS Bulukumba ke KPU Bulukumba",
@@ -32,7 +31,7 @@ class AgendaSeeder extends Seeder
                 "title"  => "Jalan Sehat Kader PKS se-Sulawesi Selatan",
                 "time"   => "06:30 WITA",
                 "date"   => "2025-08-10",
-                "location" => "Alun-Alun Kota Bulukumba",
+                "location" => "Alun-Alun Kota Takalar",
                 "image"  => "image/agenda/jalan-sehat-kader-pks-se-sulawesi-selatan.jpg"
             ],
             [
@@ -53,7 +52,7 @@ class AgendaSeeder extends Seeder
                 "title"  => "Penyerahan Berkas Pendaftaran Calon Bupati ke PKS Bulukumba",
                 "time"   => "10:00 WITA",
                 "date"   => "2025-06-10",
-                "location" => "Kantor DPW PKS Sulawesi Selatan, Makassar",
+                "location" => "Sekretariat DPD PKS Bulukumba",
                 "image"  => "image/agenda/penyerahan-mandat-kepada-calon-bupati-usungan-pks-bulukumba.png"
             ],
         ];

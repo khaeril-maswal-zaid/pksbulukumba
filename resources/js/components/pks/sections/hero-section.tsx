@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Link, usePage } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -72,11 +72,11 @@ export default function HeroSection() {
                                         </Button>
                                     </a>
 
-                                    <Link href="/#agenda">
+                                    {/* <Link href="/#agenda">
                                         <Button size="lg" variant="outline" className="border-white bg-white text-gray-800 hover:bg-gray-100">
                                             Lihat Agenda
                                         </Button>
-                                    </Link>
+                                    </Link> */}
                                 </motion.div>
                             </div>
                         </div>

@@ -36,20 +36,15 @@ class BlogController extends Controller
         ];
         request()->attributes->set('og', $ogTags);
 
-        $kategory = ['News', 'Dakwah', 'Opini', 'The Story'];
-
-        $countKategory = [];
-        foreach ($kategory as $key => $value) {
-            $countKategory[] = Blog::where('category', $value)->count();
-        }
+        $blog->update([
+            'visit' => $blog->visit + 1
+        ]);
 
         $data = [
             'blogDetail' => $blog->load('author'),
             'relatedNews' => Blog::select('title', 'slug', 'picture1', 'category', 'created_at')->whereNot('slug', $blog->slug)->latest()->take(3)->get(),
-            'kategory' =>  $kategory,
-            'countKategory' => $countKategory,
-            'tagsRandom' =>  Blog::inRandomOrder()->limit(2)->pluck('tags')
         ];
+
         return Inertia::render('pks/berita/detail', $data);
     }
 

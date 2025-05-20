@@ -37,7 +37,7 @@ export default function NewsSection({ blogs }) {
     };
 
     return (
-        <section id="berita" className="bg-gray-50 py-16" ref={ref}>
+        <section id="berita" className="bg-gray-100 py-12 md:py-16" ref={ref}>
             <div className="container mx-auto px-4">
                 <motion.div
                     className="mb-12 text-center"

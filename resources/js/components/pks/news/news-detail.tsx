@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Link } from '@inertiajs/react';
-import { Calendar, ChevronLeft, Facebook, Linkedin, MessageCircle, Share2, Tag, Twitter, User } from 'lucide-react';
+import { Calendar, ChevronLeft, Eye, Facebook, Linkedin, MessageCircle, Share2, Tag, Twitter, User } from 'lucide-react';
 import { useState } from 'react';
 import LeadershipSidebar from './leadership-sidebar';
 import RelatedNews from './related-news';
@@ -16,7 +16,8 @@ interface NewsItem {
     body3: string;
     excerpt: string;
     created_at: string;
-    author: string;
+    author: object;
+    visit: string;
     picture1: string;
     picture2: string;
     picture3: string;
@@ -30,8 +31,6 @@ interface NewsDetailProps {
 }
 
 export default function NewsDetail({ news, relatedNews }: NewsDetailProps) {
-    console.log(news);
-
     const [copied, setCopied] = useState(false);
 
     const copyToClipboard = () => {
@@ -115,6 +114,10 @@ export default function NewsDetail({ news, relatedNews }: NewsDetailProps) {
                             <div className="flex items-center">
                                 <Tag className="mr-1 h-4 w-4" />
                                 <span>{news.category || 'News'}</span>
+                            </div>
+                            <div className="flex items-center">
+                                <Eye className="mr-1 h-4 w-4" />
+                                <span>{news.visit || '165'}</span>
                             </div>
                         </div>
 

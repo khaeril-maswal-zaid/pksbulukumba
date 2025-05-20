@@ -28,7 +28,7 @@ export default function LeadershipSection({ leaders }) {
     };
 
     return (
-        <section id="kepengurusan" className="bg-white py-16" ref={ref}>
+        <section id="kepengurusan" className="bg-white py-7 md:py-16" ref={ref}>
             <div className="container mx-auto px-4">
                 <motion.div
                     className="mb-12 text-center"

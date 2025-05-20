@@ -21,10 +21,8 @@ class DatabaseSeeder extends Seeder
             'password' => 'pks08bulukumba',
         ]);
 
-
-        $this->call(BlogSeeder::class);
-        // $this->call(SantriBaruSeeder::class);
         $this->call(AgendaSeeder::class);
+        $this->call(BlogSeeder::class);
         $this->call(StrukturSeeder::class);
         $this->call(KontakSeeder::class);
     }

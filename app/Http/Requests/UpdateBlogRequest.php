@@ -28,7 +28,7 @@ class UpdateBlogRequest extends FormRequest
                 'description' => 'required|string|min:10|max:255',
                 'body1' => 'required|string|min:20',
                 'body2' => 'nullable|string',
-                'mainImage' => ['required', 'string', new ValidBase64Image], // Maks 2MB
+                'mainImage' => ['string', new ValidBase64Image], // Maks 2MB
                 'subImage1' => ['string', new ValidBase64Image],
                 'subImage2' => ['string', new ValidBase64Image],
                 'tags' => 'required|array|min:1|max:5',
