@@ -46,7 +46,9 @@ export default function IntegrationSection() {
                             </p>
                         </CardContent>
                         <CardFooter className="flex justify-center">
-                            <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Donasi Sekarang</Button>
+                            <a href="https://pks.id/donasi" target="_blank" rel="noopener noreferrer">
+                                <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Donasi Sekarang</Button>
+                            </a>
                         </CardFooter>
                     </Card>
 
@@ -64,7 +66,9 @@ export default function IntegrationSection() {
                             </p>
                         </CardContent>
                         <CardFooter className="flex justify-center">
-                            <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Unduh Sekarang</Button>
+                            <a href="https://pks.id/download" target="_blank" rel="noopener noreferrer">
+                                <Button className="bg-[#F47C20] text-white hover:bg-[#e06b15]">Unduh Sekarang</Button>
+                            </a>
                         </CardFooter>
                     </Card>
                 </div>

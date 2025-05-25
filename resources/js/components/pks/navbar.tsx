@@ -23,8 +23,8 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navigasi = ['Beranda', 'Tentang', 'Berita', 'Agenda', 'Kepengurusan', 'Galeri'];
-    const routes = ['/', '#tentang', route('blog.cards'), route('agenda.cards'), route('struktur.cards'), route('galery.cards')];
+    const navigasi = ['Beranda', 'Berita', 'Agenda', 'Kepengurusan', 'Galeri', 'Kontak'];
+    const routes = ['/', route('blog.cards'), route('agenda.cards'), route('struktur.cards'), route('galery.cards'), route('kontak.cards')];
 
     return (
         <header className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${scrolled ? 'bg-white py-2 shadow-md' : 'bg-white py-4'}`}>

@@ -28,7 +28,7 @@ export default function MapSection() {
                 <div className="mt-12">
                     <h3 className="mb-8 text-center text-2xl font-bold">Daerah Pemilihan (Dapil) Kabupaten Bulukumba</h3>
 
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-5">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-5">
                         {/* Dapil 1 */}
                         <div className="overflow-hidden rounded-xl border-t-4 border-[#F47C20] bg-white shadow-md transition-all duration-300 hover:shadow-lg">
                             <div className="p-6">

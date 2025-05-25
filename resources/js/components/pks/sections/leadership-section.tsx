@@ -49,10 +49,10 @@ export default function LeadershipSection({ leaders }) {
                         variants={container}
                         initial="hidden"
                         animate={inView ? 'show' : 'hidden'}
-                        className="grid grid-cols-1 gap-6 md:grid-cols-4"
+                        className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
                     >
-                        {leaders.map((leader) => (
-                            <motion.div key={leader.position} variants={item}>
+                        {leaders.map((leader, index) => (
+                            <motion.div key={leader.role + index} variants={item}>
                                 <Card className="gap-0 overflow-hidden border-t-4 border-[#F47C20] py-0 transition-all duration-300 hover:shadow-lg">
                                     <div className="h-hull relative w-full overflow-hidden">
                                         <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.4 }} className="w-full">
@@ -61,7 +61,7 @@ export default function LeadershipSection({ leaders }) {
                                     </div>
                                     <CardHeader className="p-4 text-center">
                                         <CardTitle className="text-lg">{leader.name}</CardTitle>
-                                        <CardDescription className="font-medium text-[#F47C20]">{leader.position}</CardDescription>
+                                        <CardDescription className="font-medium text-[#F47C20]">{leader.role}</CardDescription>
                                     </CardHeader>
                                 </Card>
                             </motion.div>

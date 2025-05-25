@@ -1,8 +1,7 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Link } from '@inertiajs/react';
-import { Calendar, ChevronLeft, Eye, Facebook, Linkedin, MessageCircle, Share2, Tag, Twitter, User } from 'lucide-react';
+import { Calendar, Eye, Facebook, Linkedin, MessageCircle, Share2, Tag, Twitter, User } from 'lucide-react';
 import { useState } from 'react';
 import LeadershipSidebar from './leadership-sidebar';
 import RelatedNews from './related-news';
@@ -84,14 +83,6 @@ export default function NewsDetail({ news, relatedNews }: NewsDetailProps) {
                 <div className="relative flex flex-col gap-8 lg:flex-row">
                     {/* Main Content - Left Column */}
                     <div className="lg:w-2/3">
-                        {/* Back Button */}
-                        <Link href="/#berita">
-                            <Button variant="ghost" className="mb-6 hover:text-[#F47C20]">
-                                <ChevronLeft className="mr-2 h-4 w-4" />
-                                Kembali ke Berita
-                            </Button>
-                        </Link>
-
                         {/* Article Header */}
                         <h1 className="mb-4 text-3xl font-bold md:text-4xl">{news.title}</h1>
 

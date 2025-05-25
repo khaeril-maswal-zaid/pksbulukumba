@@ -15,10 +15,10 @@ Route::get('/blog', [BlogController::class, 'cards'])->name('blog.cards');
 Route::get('/agenda', [AgendaController::class, 'cards'])->name('agenda.cards');
 Route::get('/struktur', [StrukturController::class, 'cards'])->name('struktur.cards');
 Route::get('/galery', [HomeController::class, 'galery'])->name('galery.cards');
+Route::get('/kontak', [KontakController::class, 'cards'])->name('kontak.cards');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-
 
     Route::get('/dashboard/blog', [BlogController::class, 'index'])->name('blog.index');
     Route::post('/dashboard/blog', [BlogController::class, 'store'])->name('blog.store');

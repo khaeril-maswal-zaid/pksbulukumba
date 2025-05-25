@@ -8,11 +8,11 @@ import NewsSection from '@/components/pks/sections/news-section';
 import PksLayout from '@/layouts/pks-layout';
 import { Head } from '@inertiajs/react';
 
-export default function Home({ slides, about, leaders, blogs, agendas, galeri }) {
+export default function Home({ about, leaders, blogs, agendas, galeri }) {
     return (
         <>
             <Head title="" />
-            <PksLayout slides={slides}>
+            <PksLayout>
                 <main>
                     <AboutSection about={about} />
                     <LeadershipSection leaders={leaders} />

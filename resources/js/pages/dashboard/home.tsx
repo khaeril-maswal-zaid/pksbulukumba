@@ -1,8 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
-import { Activity, BarChart, FileText, Users } from 'lucide-react';
+import { Head, usePage } from '@inertiajs/react';
+import { CalendarDays, FileText, Users2 } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -12,80 +11,70 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Dashboard() {
+    const { name, auth } = usePage().props;
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between pb-2">
-                                <CardTitle className="text-sm font-medium">Total Posts</CardTitle>
-                                <FileText className="text-muted-foreground h-4 w-4" />
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold">142</div>
-                                <p className="text-muted-foreground text-xs">+12% from last month</p>
-                            </CardContent>
-                        </Card>
-
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between pb-2">
-                                <CardTitle className="text-sm font-medium">Total Views</CardTitle>
-                                <Activity className="text-muted-foreground h-4 w-4" />
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold">28.4K</div>
-                                <p className="text-muted-foreground text-xs">+18% from last month</p>
-                            </CardContent>
-                        </Card>
-
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between pb-2">
-                                <CardTitle className="text-sm font-medium">Unique Visitors</CardTitle>
-                                <Users className="text-muted-foreground h-4 w-4" />
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold">12.5K</div>
-                                <p className="text-muted-foreground text-xs">+9% from last month</p>
-                            </CardContent>
-                        </Card>
-
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between pb-2">
-                                <CardTitle className="text-sm font-medium">Engagement Rate</CardTitle>
-                                <BarChart className="text-muted-foreground h-4 w-4" />
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold">5.2%</div>
-                                <p className="text-muted-foreground text-xs">+2% from last month</p>
-                            </CardContent>
-                        </Card>
-                    </div>
-                    <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                        <Card className="col-span-2">
-                            <CardHeader>
-                                <CardTitle>Recent Activity</CardTitle>
-                                <CardDescription>Your blog activity for the last 30 days</CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="flex h-[200px] items-center justify-center rounded-md border bg-gray-50">
-                                    <p className="text-muted-foreground text-sm">Activity chart will be displayed here</p>
+                <div className="relative overflow-hidden rounded-xl border border-blue-100 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-indigo-600/5 to-purple-600/5"></div>
+                    <div className="relative p-8 md:p-12">
+                        <div className="flex flex-col items-center justify-between md:flex-row">
+                            <div className="mb-6 flex-1 text-center md:mb-0 md:text-left">
+                                <div className="mb-4 inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700">
+                                    <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-blue-500"></span>
+                                    Dashboard Admin
                                 </div>
-                            </CardContent>
-                        </Card>
+                                <h2 className="mb-2 text-3xl font-bold text-gray-900 md:text-4xl">
+                                    Selamat datang, <span className="text-blue-600">{auth?.user?.name.split(' ').slice(0, 2).join(' ')}</span>
+                                </h2>
+                                <p className="mb-4 text-lg text-gray-600">di Dashboard Website Resmi</p>
+                                <h3 className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-2xl font-bold text-transparent md:text-3xl">
+                                    DPD {name}
+                                </h3>
+                                <p className="mx-auto mt-4 max-w-md text-gray-500 md:mx-0">
+                                    Kelola semua informasi pendaftaran dan data pesantren dengan mudah melalui panel admin yang terintegrasi.
+                                </p>
+                            </div>
 
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Popular Categories</CardTitle>
-                                <CardDescription>Most viewed categories</CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="flex h-[200px] items-center justify-center rounded-md border bg-gray-50">
-                                    <p className="text-muted-foreground text-sm">Category chart will be displayed here</p>
+                            <div className="flex-shrink-0">
+                                <div className="relative">
+                                    <div className="flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-purple-500 shadow-2xl md:h-40 md:w-40">
+                                        <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white md:h-32 md:w-32">
+                                            <span className="text-3xl font-bold text-blue-600 md:text-4xl">PKS</span>
+                                        </div>
+                                    </div>
+                                    <div className="absolute -top-2 -right-2 h-6 w-6 animate-pulse rounded-full border-4 border-white bg-green-500"></div>
                                 </div>
-                            </CardContent>
-                        </Card>
+                            </div>
+                        </div>
+
+                        <div className="mt-8 border-t border-blue-200/50 pt-6">
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                                <div className="text-center">
+                                    <div className="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                                        <FileText className="h-6 w-6" />
+                                    </div>
+                                    <p className="text-sm font-medium text-gray-900">Kelola Blog</p>
+                                    <p className="text-xs text-gray-500">News, Aspirasi, Edukasi Politik, Opini, Inspirasi </p>
+                                </div>
+                                <div className="text-center">
+                                    <div className="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                                        <CalendarDays className="h-6 w-6" />
+                                    </div>
+                                    <p className="text-sm font-medium text-gray-900">Kelola Agenda</p>
+                                    <p className="text-xs text-gray-500">Kegiatan maupun Program</p>
+                                </div>
+                                <div className="text-center">
+                                    <div className="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+                                        <Users2 className="h-6 w-6" />
+                                    </div>
+                                    <p className="text-sm font-medium text-gray-900">Kelola Kepengurusan</p>
+                                    <p className="text-xs text-gray-500">Databases dan Informasi</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

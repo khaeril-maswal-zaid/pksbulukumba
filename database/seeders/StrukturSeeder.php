@@ -15,62 +15,39 @@ class StrukturSeeder extends Seeder
     {
         $strukturs = [
             [
-                'name' => 'Abdurrauf Abdullah P, M.Pd.',
-                'no_hp' => '+62 813-8125-0081',
-                'role' => "Pimpinan Pesantren",
-                'keterangan' => 'Pimpinan',
+                'no_hp' => '3123456789',
+                'keterangan' => 'lorem',
+                'name' => "Lukman Abdullah",
                 'main' => 1,
-                'image' => 'image/structure/abdurrauf-abdullah-pawaly.png',
+                'role' => "Ketua MPD DPD PKS Bulukumba",
+                'image' => "image/structur/lukman-abdullah.jpg"
             ],
             [
-                'name' => 'Al-Hafidz Ahmad Jazee, M.Pd',
-                'no_hp' => '1234567890',
-                'role' => "Dewan Pakar",
-                'keterangan' => "Pemegang sanad qira'at sab'ah dari syekh Musa jibou as-sudani",
+                'no_hp' => '1123456789',
+                'keterangan' => 'lorem',
+                'name' => "A. Muh. Sabri Mustari, SS",
                 'main' => 1,
-                'image' => 'image/structure/ahmad-jazee.png',
+                'role' => "Ketua DPD PKS Bulukumba",
+                'image' => "image/structur/a-muh-sabri-mustari-ss.JPG"
             ],
             [
-                'name' => 'Al- Hafidz Fathi Ararya Dihyan',
-                'no_hp' => '1234567890',
-                'role' => 'Trainer dan Pembina',
-                'keterangan' => 'Berlisensi dan Bersanad',
+                'no_hp' => '2123456789',
+                'keterangan' => 'lorem',
+                'name' => "Dr. Supriadi, Ph. D",
                 'main' => 1,
-                'image' => 'image/structure/fathi-ararya-dihyan.png',
+                'role' => "Sekretaris DPD PKS Bulukumba",
+                'image' => "image/structur/dr-supriadi-ph-d.JPG"
             ],
             [
-                'name' => 'Al-Hafidz M. Zainal Hasani',
-                'no_hp' => '1234567890',
-                'role' => 'Trainer dan Pembina',
-                'keterangan' => 'Berlisensi dan Bersanad',
+                'no_hp' => '3123456789',
+                'keterangan' => 'lorem',
+                'name' => "Ahmad Rasyidi",
                 'main' => 1,
-                'image' => 'image/structure/m-zainal-hasani.png',
-            ],
-            [
-                'name' => 'Fulanah',
-                'no_hp' => '1234567890',
-                'role' => 'Official',
-                'keterangan' => 'Training',
-                'main' => 0,
-                'image' => 'image/structure/custom-struktur.jpg',
-            ],
-            [
-                'name' => 'Fulanah',
-                'no_hp' => '1234567890',
-                'role' => 'Official',
-                'keterangan' => 'Training',
-                'main' => 0,
-                'image' => 'image/structure/custom-struktur.jpg',
-            ],
-            [
-                'name' => 'Fulanah',
-                'no_hp' => '1234567890',
-                'role' => 'Official',
-                'keterangan' => 'Training',
-                'main' => 0,
-                'image' => 'image/structure/custom-struktur.jpg',
+                'role' => "Bendahara DPD PKS Bulukumba",
+                'image' => "image/structur/ahmad-rasyidi.JPG"
             ],
         ];
+
 
         foreach ($strukturs as $key => $struktur) {
             Struktur::create([

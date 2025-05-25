@@ -44,7 +44,7 @@
             }
         </style>
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ config('app.name', 'DPD PKS Bulukumba') }}</title>
 
         <link rel="icon" href="/image/assets/logo-pks-icon.png" type="image/png">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
