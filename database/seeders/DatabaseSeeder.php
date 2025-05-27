@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Official PKS Bulukumba',
-            'email' => 'official8@bulukumba.pks.id',
-            'password' => 'pks08bulukumba',
+            'email' => 'official@bulukumba.pks.id',
+            'password' => 'bulukumba08',
         ]);
 
         $this->call(AgendaSeeder::class);
