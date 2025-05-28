@@ -29,7 +29,7 @@ class StoreAgendaRequest extends FormRequest
             'time2' => 'nullable|string',
             'lokasi' => 'required|string|max:20',
             'lokasi' => 'required|string|max:20',
-            'foto' => ['required', 'string', new ValidBase64Image],
+            'foto' => ['string', new ValidBase64Image],
         ];
     }
 }

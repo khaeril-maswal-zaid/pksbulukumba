@@ -31,7 +31,7 @@ export default function Dashboard() {
                                 </h2>
                                 <p className="mb-4 text-lg text-gray-600">di Dashboard Website Resmi</p>
                                 <h3 className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-2xl font-bold text-transparent md:text-3xl">
-                                    DPD {name}
+                                    {name}
                                 </h3>
                                 <p className="mx-auto mt-4 max-w-md text-gray-500 md:mx-0">
                                     Kelola semua informasi pendaftaran dan data pesantren dengan mudah melalui panel admin yang terintegrasi.

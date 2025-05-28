@@ -46,8 +46,8 @@
 
         <title inertia>{{ config('app.name', 'DPD PKS Bulukumba') }}</title>
 
-        <link rel="icon" href="/image/assets/logo-pks-icon.png" type="image/png">
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="icon" href="/storage/image/assets/logo-pks-icon.png" type="image/png">
+        {{-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> --}}
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
