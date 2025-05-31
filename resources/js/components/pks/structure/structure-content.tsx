@@ -10,7 +10,11 @@ export default function StructureContent() {
                     <Card key={leader.id} className="overflow-hidden py-0 transition-all duration-300 hover:shadow-md">
                         <div className="flex h-full flex-col md:flex-row">
                             <div className="relative h-full w-full md:h-auto md:w-1/3">
-                                <img src={leader.image || '/placeholder.svg'} alt={leader.name} className="h-full object-cover object-top" />
+                                <img
+                                    src={`/storage/${leader.image}` || '/placeholder.svg'}
+                                    alt={leader.name}
+                                    className="h-full object-cover object-top"
+                                />
                             </div>
                             <div className="p-6 md:w-2/3">
                                 <h3 className="mb-1 text-xl font-bold">{leader.name}</h3>
