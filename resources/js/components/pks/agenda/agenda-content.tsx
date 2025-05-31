@@ -73,6 +73,8 @@ const agendaItems = [
 ];
 
 export default function AgendaContent({ allAgendaData }) {
+    console.log(allAgendaData);
+
     const { name } = usePage().props;
     const [scrollY, setScrollY] = useState(0);
     const [activeYear, setActiveYear] = useState(new Date().getFullYear().toString());
