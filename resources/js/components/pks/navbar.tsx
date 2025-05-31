@@ -67,7 +67,7 @@ export default function Navbar() {
                         {navigasi.map((item, index) => (
                             <Link
                                 key={index}
-                                href={`#${item.toLowerCase()}`}
+                                href={routes[index]}
                                 className="ms-3 mb-3 block text-sm font-medium text-gray-700 hover:text-[#F47C20]"
                                 onClick={toggleMenu}
                             >
