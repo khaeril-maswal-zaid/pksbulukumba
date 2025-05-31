@@ -127,7 +127,7 @@ class AgendaController extends Controller
     public function cards()
     {
         // $query = Agenda::select('title', 'date', 'time', 'location', 'image')->paginate(6);
-        $query = Agenda::all();
+        $query = Agenda::all()->latest();
 
         // Group by year
         $byYear = $query->groupBy(function ($agenda) {
