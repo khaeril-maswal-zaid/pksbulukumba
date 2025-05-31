@@ -99,10 +99,7 @@ export default function KontakPage({ strukturSlides, contactChannels }) {
                                                 <div className="mt-1 mb-4">
                                                     <MapPin className="me-3" />
                                                 </div>
-                                                <p>
-                                                    Jl. Manggis No. 8, depan pinti II Masjid Agung, Bintarore, Kec. Ujung Bulu, Kabupaten Bulukumba,
-                                                    Sulawesi Selatan 92511.
-                                                </p>
+                                                <p>Jl. Manggis No. 8, Kel. Loka, Kec. Ujung Bulu, Kab. Bulukumba, Sulawesi Selatan 92511.</p>
                                             </div>
                                         </div>
 

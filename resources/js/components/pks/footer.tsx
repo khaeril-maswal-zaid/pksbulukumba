@@ -35,11 +35,11 @@ export default function Footer() {
                         <ul className="space-y-2">
                             {[
                                 { name: 'Dashboard', href: '/dashboard' },
-                                { name: 'Tentang Kami', href: '#tentang' },
-                                { name: 'Berita', href: '#berita' },
-                                { name: 'Agenda', href: '#agenda' },
-                                { name: 'Galeri', href: '#galeri' },
-                                { name: 'Kontak', href: '#' },
+                                { name: 'Berita', href: route('blog.cards') },
+                                { name: 'Kepengurusan', href: route('struktur.cards') },
+                                { name: 'Agenda', href: route('agenda.cards') },
+                                { name: 'Galeri', href: route('galery.cards') },
+                                { name: 'Kontak', href: route('kontak.cards') },
                             ].map((link, index) => (
                                 <motion.li key={index} whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
                                     <Link href={link.href} className="text-gray-400 hover:text-[#F47C20]">
@@ -74,8 +74,7 @@ export default function Footer() {
                             <motion.li className="flex items-start space-x-3" whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
                                 <MapPin size={20} className="mt-1 flex-shrink-0 text-[#F47C20]" />
                                 <span className="text-gray-400">
-                                    Jl. Manggis No. 8, depan pinti II Masjid Agung, Bintarore, Kec. Ujung Bulu, Kabupaten Bulukumba, Sulawesi Selatan
-                                    92511.
+                                    Jl. Manggis No. 8, Kel. Loka, Kec. Ujung Bulu, Kab. Bulukumba, Sulawesi Selatan 92511.
                                 </span>
                             </motion.li>
                             <motion.li className="flex items-center space-x-3" whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>

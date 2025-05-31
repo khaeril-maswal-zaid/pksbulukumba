@@ -134,7 +134,6 @@ class BlogController extends Controller
             'picture2' => '',
             'picture3' => '',
             'tags' => $request->tags,
-            'visit' => 50
         ]);
 
         return to_route('blog.index');
